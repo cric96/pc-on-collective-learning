@@ -1,3 +1,3 @@
 [submodule ".style"]
 	path = .style
-	url = git@github.com:gciatto-unibo/beamer-style-AMSBolognaFC.git
+	url = https://github.com/gciatto-unibo/beamer-style-AMSBolognaFC.git
