@@ -11,26 +11,33 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[T1]{fontenc}
 \usepackage{wasysym}
-\usepackage[yyyymmdd]{datetime}
+\usepackage{amsmath,blkarray}
+\usepackage{centernot}
+\usepackage{fontawesome}
+\usepackage{fancyvrb}
+\usepackage[iso]{datetime}
 \renewcommand{\dateseparator}{}
-\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
-    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \newcommand{\version}{1}
+\usepackage[
+	backend=biber,
+	style=alphabetic]{biblatex}
+\addbibresource{biblio.bib}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title[AMS Bologna FC Beamer Style]
-{AMS Bologna FC Beamer Style}
+\title[On Collective Reinforcement Learning]
+{On Collective Reinforcement Learning}
 %
-\subtitle[AMS Series Templates]
-{AMS Series Templates}
+\subtitle[Techniques, Challenges, and Opportunities]
+{Techniques, Challenges, and Opportunities}
 %
-\author[\sspeaker{Omicini} \and Else]
-{\speaker{Andrea Omicini} \and Nobody Else\\\href{mailto:andrea.omicini@unibo.it}{andrea.omicini@unibo.it} \and \href{mailto:nobody.else@unibo.it}{nobody.else@unibo.it}}
+\author[\sspeaker{Aguzzi}]
+{\speaker{Gianluca Aguzzi} \and Mirko Viroli\\\href{mailto:gianluca.aguzzi@unibo.it}{gianluca.aguzzi@unibo.it} \and \href{mirko.viroli@unibo.it}{mirko.viroli@unibo.it}}
 %
 \institute[DISI, Univ.\ Bologna]
 {Dipartimento di Informatica -- Scienza e Ingegneria (DISI)\\\textsc{Alma Mater Studiorum} -- Universit{\`a} di Bologna}
 %
-\date[v.\ \version.\today]{version \version.\today}
+\renewcommand{\dateseparator}{/}
+\date[\today]{\today}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
@@ -41,303 +48,519 @@
 %/////////
 
 %%===============================================================================
-%\section*{Outline}
+\section*{Outline}
 %%===============================================================================
-%
+
 %%/////////
-%\frame[c]{\tableofcontents[hideallsubsections]}
+\frame[c]{\tableofcontents[hideallsubsections]}
 %%/////////
 
 %===============================================================================
-\section{Premises}
+\section{Introduction}
 %===============================================================================
 
 %/////////
-\begin{frame}[c]{Academic Presentations}
-%
-\begin{itemize}
-	\item technical presentations are common in the academic environment
-	\item \alert{\LaTeX{}}\footnote{\uurl{http://latex.org}} is typically used for scientific literature
+\begin{frame}[c]{Introduction}
+%/////////
+\begin{alertblock}{Motivation}
 	\begin{itemize}
-		\item for better formulas, bibliography, typography, \ldots
+		\item Learning is a key aspect to drive \emph{adaptivity} (by reason under uncertainty)
+		\item Intelligent agents improve their performance with \emph{experience}
+		\item We would like to improve adaptiveness with raw experience and, hence 
+		\item We would like to bring Reinforcement Learning methodology in such kind of systems
 	\end{itemize}
-	\item so, \LaTeX{} is the most typical \emph{toolbox} for scientific presentations
+\end{alertblock}
+\begin{alertblock}{Lecture goals}
 	\begin{itemize}
-		\item which easily translates into teaching presentations, too
+		\item Understading the challenges related to the Multi-Agent System (MAS) domain
+		\item Show Patterns and Architecture applied in Collective Systems
+		\item Hands-on in some pratictal example of Collective Learning
 	\end{itemize}
-\end{itemize}
-%
-\end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c]{Beamer}
-%
-\begin{itemize}
-	\item \alert{Beamer} is a \LaTeX{} document class for creating presentation \emph{slides}, with a wide range of \emph{templates} and a set of features for making \emph{slideshow effects}
-	\begin{description}
-		\item[repo] \uurl{https://github.com/josephwright/beamer}
-		\item[CTAN] \uurl{https://ctan.org/pkg/beamer}
-	\end{description}
-	\item even though other styles for \LaTeX{} presentations exist, Beamer is by far the best way today
-\end{itemize}
-%
-\end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c]{AMS}
-%
-\begin{description}
-	\item[AMS] Alma Mater Studiorum--Università di Bologna
-	\item[Cesena] Campus of Cesena
-	\begin{itemize}
-		\item hence the AMS Cesena Campus logo on the bottom-left corner
-	\end{itemize}
-\end{description}
-%
-\end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c]{Aim}
-%
-\begin{itemize}
-	\item many occasions for presentation
-	\item many different people in the group
-	\item a common reference could be useful
-	\item hence, this style
-	\item based on random Beamer styles, and using some references for the colours
-\end{itemize}
-%
-\end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c]{Who}
-%
-\begin{itemize}
-	\item mostly, myself
-	\item and, collaborators of mine---the \alert{good} ones \textcolor{bolognafcred}{\smiley{}}
-	\item everybody else, \emph{be my guest!}
-\end{itemize}
-%
-\end{frame}
-%/////////
-
-%===============================================================================
-\section{Use}
-%===============================================================================
-
-%/////////
-\begin{frame}[c]{Files}
-%
-\begin{block}{Style files}
-The files
-\begin{itemize}
-	\item \texttt{beamercolorthemebolognafc.sty}
-	\item \texttt{beamerthemeAMSBolognaFC.sty}
-\end{itemize}
-along with \texttt{img} folder containing \texttt{almacesena-background.pdf} file should be placed either in the local folder with the main \texttt{.tex} file, or in your Beamer system directory, e.g.
-\begin{itemize}
-	\item \texttt{/Users/\{username\}/Library/texmf/tex/latex/local/beamer/}
-\end{itemize}
-\end{block}
-%
-\end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c,fragile]{Declaration}
-%
-\begin{block}{\texttt{\textbackslash{}documentclass}}
-Your main Beamer \texttt{.tex} file should open with the declaration
-%
-\begin{verbatim}
-    \documentclass[presentation]{beamer}
-        \mode<presentation>{\usetheme{AMSBolognaFC}}
-\end{verbatim}
-%
-so as to use the AMS Bologna FC Beamer style 
-\end{block}
-%
-\end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c,fragile]{Template}
-%
-\begin{block}{\texttt{AMSBolognaFC-template.tex}}
-This template's sources can be used as a simple example of how yo use this Beamer style
-\end{block}
-%
-\end{frame}
-%/////////
-
-
-%===============================================================================
-\section{Style}
-%===============================================================================
-
-%/////////
-\begin{frame}[c,allowframebreaks]{Colours for AMS Bologna FC}
-%
-\begin{exampleblock}{\texttt{\textcolor{bolognafcblue}{bolognafcblue}}}
-	\begin{description}
-		\item[HEX] \texttt{\#1A2F48}
-		\item[RGB] \texttt{26,47,72}
-	\end{description}
-\end{exampleblock}
-\begin{exampleblock}{\texttt{\textcolor{bolognafcred}{bolognafcred}}}
-	\begin{description}
-		\item[HEX] \texttt{\#A21C26}
-		\item[RGB] \texttt{162,28,38}
-	\end{description}
-\end{exampleblock}
-\framebreak
-\begin{block}{\texttt{\textcolor{bolognafcwhite}{bolognafcwhite}}}
-	\begin{description}
-		\item[HEX] \texttt{\#FFFFFF}
-		\item[RGB] \texttt{255,255,255}
-	\end{description}
-\end{block}
-\begin{alertblock}{\texttt{\textcolor{bolognafcsilver}{bolognafcsilver}}}
-	\begin{description}
-		\item[HEX] \texttt{\#ECECEC}
-		\item[RGB] \texttt{236,236,236}
-	\end{description}
 \end{alertblock}
 %
 \end{frame}
 %/////////
 
 %/////////
-\begin{frame}[c,fragile]{Blocks}
-%
-\begin{block}{This is a \texttt{block} environment}
-\begin{verbatim}
-\begin{block}
-...
-\end{block}
-\end{verbatim}
-\end{block}
-%
-\begin{exampleblock}{This is an \texttt{exampleblock} environment}
-\begin{verbatim}
-\begin{exampleblock}
-...
-\end{exampleblock}
-\end{verbatim}
-\end{exampleblock}
-%
-\begin{alertblock}{This is an \texttt{alertblock} environment}
-\begin{verbatim}
-\begin{alertblock}
-...
-\end{alertblock}
-\end{verbatim}
-\end{alertblock}
-%
-\end{frame}
+\begin{frame}[c, fragile]{Single-Agent Learning}
 %/////////
-
-%===============================================================================
-\section{New Commands}
-%===============================================================================
-
-%/////////
-\begin{frame}[c,allowframebreaks,fragile]{Citations}
-%
-\begin{alertblock}{\texttt{\textbackslash{}ccite} command---e.g., \ccite{bibtex-patashnik88}}
-\begin{verbatim}
-\ccite{bibtex-patashnik88}
-\end{verbatim}
-\begin{itemize}
-	\item to be used instead of standard \texttt{\textbackslash{}cite} command
-	\item prints as \ccite{bibtex-patashnik88}
-	\item can be used as a note\ccite{bibtex-patashnik88}, with no space before
-\end{itemize}
-\end{alertblock}
-%
-\begin{exampleblock}{\texttt{\textbackslash{}cccite} command---e.g., \cccite{bibtex-patashnik88}}
-\begin{verbatim}
-\cccite{bibtex-patashnik88}
-\end{verbatim}
-\begin{itemize}
-	\item a lighter version of the \texttt{\textbackslash{}ccite} command over non-dark, non-light backgrounds
+\begin{exampleblock}{What have you seen so far ...}
 	\begin{itemize}
-		\item as here above in \texttt{examplebox} header
+		\item Markov Decision Process (MDP) to model the agent-environment interactions
+		\item Find learning process that eventually lead to an \emph{optimal} policy $\pi^*$
+		\item Q-Learning (in general \emph{value-based approaches}) as a prominient algorithm case to reach converge
 	\end{itemize}
-	\item can be used as a note with no space before, in the same way as \texttt{\textbackslash{}ccite}
-\end{itemize}
 \end{exampleblock}
+\begin{alertblock}{... But this works only under some conditions}
+	\begin{itemize}
+		\item Reward hypothetesis
+		\item Full environment observability and Markovian property
+		\item Stationary environment
+		\item State/Action space should be small enough to be stored in-memory (otherwise, we should leverage function aproximators)
+	\end{itemize}	
+\end{alertblock}
+\end{frame}
+%/////////
+\begin{frame}{Partial Observable environments}
+%/////////
+	\begin{alertblock}{Definition}
+		Agent does not have a \emph{perfect} and \emph{complete} knowledge perception of the state of the environment
+	\end{alertblock}
+	\begin{exampleblock}{They are quite typical in (non-)complex systems}
+		\begin{itemize}
+			\item Card-games (poker, black-jack, ...) --- Why?
+			\item A driving card
+			\item Swarm of drones
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Partial Observable Environments}
+	\begin{exampleblock}{Partial Observable MDP $\mathcal{P}$ (POMDP) \href{https://www.pomdp.org/}{\faLink}}
+		\begin{itemize}
+			\item Agent cannot directly observe the system state, but he can make an \emph{observation} that depend on this state
+			\item POMDP is a tuple $(S, A, T, R, \Omega, O)$
+			\item $S, A, T, R$ are the same variable described in MDP
+			\item $\Omega$ is the set of observation perceive by the agent $\{o_1, ..., o_n\}$
+			\item $O$ is the set of conditional probability $O(o | s, a)$
+			\item I want to learn a policy that depends on $o$ but maximise a reward function that depends on $s$
+			\item The agents need to build a belif state from the observations history
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+%/////////
+\begin{frame}[c]{Non-stationary environments}
+%/////////
+	\begin{alertblock}{Definition}
+		The environment model (e.g. the random variable associated with it) change 
+		over the time.
+	\end{alertblock}
+	\begin{exampleblock}{MDP are Stationary by definition ...}
+		\begin{itemize}
+			\item ... But, real-case environment dynamics could change over time (e.g. markets, city trafic, routing networks)
+			\item Pratically, it seems that RL works well even in this case (online learning)
+			\item \emph{But, we loose converge guarantee.}
+		\end{itemize}
+	\end{exampleblock}
 %
+\end{frame}
+
+%===============================================================================
+\section{From Single Agent To Multi-Agent}
+%===============================================================================
+
+%/////////
+\begin{frame}[c]{From Single-Agent To Multi-Agent}
+%/////////
+	\begin{alertblock}{Multi Agent Reinforcement Learning (MARL)}
+		\centering
+		\emph{Multiple agents learn \textbf{togheter} the best a policy that maximise
+	a long term reward signal.}
+	\end{alertblock}
+	\begin{exampleblock}{Considerations}
+		\begin{itemize}
+			\item If multiple agent exist, but only \textbf{one} agent learn by experience, then it is a single agent problem (e.g. single player videogames)
+			\item So, MAS + Learning $\centernot\implies$ MARL, \textbf{but} MARL $\implies$ MAS
+		\end{itemize}
+	\end{exampleblock}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}		
+			\begin{figure}
+				\includegraphics[height=2.5cm]{example-image-a}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.5\textwidth}	
+			\begin{figure}
+				\includegraphics[height=2.5cm]{example-image-a}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+%/////////
+\begin{frame}[c]{Stochastic Game $\mathcal{S}$ (or Markov games)}
+%/////////
+	\begin{alertblock}{}
+		\begin{itemize}
+			\item Extension of MDP to the MAS regime
+			\item Common abstraction in MARL algorithm
+		\end{itemize}
+	\end{alertblock}
+	\begin{alertblock}{Definition}
+		\begin{itemize}
+			\item $\mathcal{S}$ is a tuple $<N, S, \{A^i\}_{i \in \{ 1, ..., N\}}, P, \{R^i\}_{i \in \{ 1, ..., N\}}>$
+			\item $N$ is the number of agents ($|N| > 1 $)
+			\item $S$ is the global environment state
+			\item $A^i$ is the action state of agent $i$. $\mathbb{A} := A^1 \times ...\times A^N$ is the joint action space
+			\item $P: S x \mathbb{A} \rightarrow \mathcal{P}(S)$ is the state transaction. $\mathcal{P}$ is a discrete probabilistic distribution (associate for each $s \in S$ a probability)
+			\item $R^i: S \times \mathbb{A} \times S \rightarrow \mathbb{R}$ is the reward signal
+			\item Typical time evolution: $ S_0, \mathbb{A}_0, \mathbb{R}_1, S_1, ...  $
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+%/////////
+\begin{frame}[fragile]{Stochastic games: Example}
+%/////////
+	\begin{exampleblock}{Paper Rock Scissor}
+		\begin{itemize}
+			\item $N = 2$
+			\item $A^1 = A^2 = $ \{Paper, Rock, Scissor\}
+			\item $S = $ \{ \}
+			\item $R^1 = R^2 = \begin{blockarray}{cccc}
+        & Rock & Paper & Scissor \\
+      \begin{block}{c[ccc]}
+        Rock    & 0, 0  & -1, 1 & 1, -1 \\
+        Paper   & 1, -1 & 0, 0  & -1, 1 \\
+        Scissor & -1, 1 & 1, -1 & 0, 0 \\
+      \end{block}
+    \end{blockarray}$
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+%/////////
+\begin{frame}{MARL Systems: Task type}
+%/////////
+	\begin{alertblock}{Cooperative}
+		\begin{itemize}
+			\item Agents share the same reward function ($R^1 = ... = R^N$) in order to accomplish a collective goal
+		\end{itemize}
+	\end{alertblock}
+	\begin{exampleblock}{Competitive}
+		\begin{itemize}
+			\item Agents compete with each other to maximise a long term return
+			\item Board Games, Video games
+		\end{itemize}
+	\end{exampleblock}
+	\begin{exampleblock}{Mixed}
+		\begin{itemize}
+			\item Agent can both compete and cooperate in order to maximise a global reward function
+			\item Also called \textit{General Sum games}
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+\begin{frame}{On Cooperative Task}
+	\begin{exampleblock}{Homogeneous}
+		\begin{itemize}
+			\item Each agent has the same capability ($A^1 = ... = A^N$)
+			\item The overall goal is to find the best policy that is the same for each agent ($\pi^* = {\pi^{*}}_1 ... {\pi^{*}}_N$)
+		\end{itemize}
+	\end{exampleblock}
+	\begin{exampleblock}{Heterogenoues}
+		\begin{itemize}
+			\item Each agent could have different capabilities (in the worst case, $A^1 \neq ... \neq A^N$)
+			\item Each agent has its local policy that should be maximised following the global collective goal
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+%/////////
+\begin{frame}{MARL Systems: Learning Scheme}
+	\begin{exampleblock}{Cetralised Learning and Centralised Execution}
+		\begin{itemize}
+			\item \emph{One} agent with a global view of the system (in the cloud? in a server?)
+			\item Node send their perception to that Node
+			\item With them, it create a global state of the system
+			\item With the current policy, it chooses the action that nodes should performance and send to them (\emph{Control})
+			\item In the next time step, it evaluates the reward function and update the policy accordingly (\emph{Learn})
+			\item \emph{Are the nodes agents?}
+			\item Both used in offline and pure-online setting
+		\end{itemize}
+	\end{exampleblock}
+
 \end{frame}
 %/////////
 
 %/////////
-\begin{frame}[c,fragile]{URLs}
-%
-\begin{block}{\texttt{\textbackslash{}uurl} command}
-\begin{itemize}
-	\item to be used instead of standard \texttt{\textbackslash{}url} command
-	\item[e.g.] \verb|\uurl{http://apice.unibo.it}| prints as \uurl{http://apice.unibo.it}
-\end{itemize}
-\end{block}
-%
-\begin{block}{\texttt{\textbackslash{}uuurl} command---e.g., \uuurl{http://apice.unibo.it}}
-\begin{itemize}
-	\item to be used instead of standard \texttt{\textbackslash{}url} command over dark backgrounds
-	\item[e.g.] see \verb|\uuurl{http://apice.unibo.it}| above in this \texttt{block} header
-\end{itemize}
-\end{block}
-%
+\begin{frame}{MARL Systems: Learning Scheme}
+	
+	\begin{exampleblock}{Decentralised Learning and Distributed Execution}
+		\begin{itemize}
+			\item Each nodes has their local policy/value table
+			\item They can perceive the environment state (or can observe a part of it)
+			\item With the current state, they performance an action (\emph{Control})
+			\item In the next time step, they update their policy following a local reward function 
+			\item Both used in offline and pure-online setting
+		\end{itemize}
+	\end{exampleblock}
 \end{frame}
 %/////////
-
-%/////////
-\begin{frame}[c,fragile]{Alert}
-%
-\begin{block}{\texttt{\textbackslash{}aalert} command---e.g., \aalert{alerted text}}
-\begin{itemize}
-	\item to be used instead of standard \texttt{\textbackslash{}alert} command over dark backgrounds
-	\item[e.g.] see \verb|\aalert{alerted text}| above in this \texttt{block} header
-\end{itemize}
-\end{block}
-%
+\begin{frame}{MARL Systems: Learning Scheme}
+	
+	\begin{exampleblock}{Centralised Learning and Distributed Execution}
+		\begin{itemize}
+			\item A offline-learning online execution patterns
+			\item \emph{Simulation time}
+			\begin{itemize}
+				\item Each node follow the typical $o_t, a_t, o_{t+1}, a_{t+1},... $ trajectory using a local policy
+				\item After an episode, this trajectory (or something dirived from it) will be sent to a central learner
+				\item It, using a global view of the system, improve the policies of the agents 
+				\item At the end of the traning phase, the policy will be shared to the agent s
+			\end{itemize} 
+			\item \emph{Execution time}
+				\begin{itemize}
+					\item Each agent has the local policy distilled during the simulation time
+					\item With it, they act in the environment
+				\end{itemize}
+			\item A semplific description, more elaborate Techniques exists (i.e. agents share the gradient to the central leaner)
+		\end{itemize}
+	\end{exampleblock}
 \end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c,fragile,allowframebreaks]{Speaker(s) \emph{vs.} Authors}
-%
-\begin{exampleblock}{\texttt{\textbackslash{}speaker} command--e.g., \speaker{Diego Zorro}}
-\begin{itemize}
-	\item to be used within \texttt{\textbackslash{}author} standard \BibTeX{} command to single out the actual speaker among the authors
-	\item[e.g.] as in
-\begin{verbatim}
-	\author[Garcia \and Zorro]
-	{Sarg Garcia \and \speaker{Diego Zorro}}
-\end{verbatim}
-	\item and in the author specification of this template
-\end{itemize}
+%===============================================================================
+\section{Learning in CAS}
+%===============================================================================
+\begin{frame}[c]{Learning in Collective Adaptive System~\footnote[frame]{\fullcite{DBLP:conf/icse/DAngeloGGGNPT19}}}
+\begin{exampleblock}{}
+	\begin{itemize}
+		\item The collective goal could be accomplished through competition and/or cooperation 
+		\item The system could be heterogenoues or homogeneous
+		\item The agent numers is not bounded (openness)
+		\item Distributed control -- i.e. no central authority exists
+	\end{itemize}
 \end{exampleblock}
-%
-\begin{block}{\texttt{\textbackslash{}sspeaker} command--e.g., \sspeaker{Diego Zorro}}
-\begin{itemize}
-	\item to be used within \texttt{\textbackslash{}author} standard \BibTeX{} command to single out the actual speaker among the authors in the short form
-	\item[e.g.] as in
-\begin{verbatim}
-	\author[Garcia \and \sspeaker{Zorro}]
-	{Sarg Garcia \and \speaker{Diego Zorro}}
-\end{verbatim}
-	\item and in the author specification of this template
-\end{itemize}
-\end{block}
-
 \end{frame}
 %/////////
+\begin{frame}[c]{Learning in CAS: Challenges}
+	\begin{exampleblock}{CASs are partial observable}
+		Each agent could only perceive a part of the system through its sensors.
+	\end{exampleblock}
+	\begin{alertblock}{Learning in CASs make the environments non-stationary}
+		Each agent learns concurrently, so by the eye of the other agent the environment is in continuous changes.
+	\end{alertblock}
+	\begin{alertblock}{Course of dimensionality -- MAS combinatorial nature}
+		When we have to deal with a large number of agents, the overall state-action space is increasing exponentially to the number of agents --- so a central learner cannot solve the learning problem.
+	\end{alertblock}
+\end{frame}
+%/////////
+\begin{frame}[c]{Learning in CAS: Challenges}
+	\begin{exampleblock}{Multi-Agent credit assigment problem}
+		Tipycally, in CAS, a global reward function exisist. But it is hard to understand the influence of a single agent to
+		the overall collective behaviour.
+	\end{exampleblock}
+	\begin{exampleblock}{A lack of a global clock}
+		CASs are distributed systems, so a global synchronization clock does not exist, making the standard
+		Stachocastic game model quinte inaquate.
+	\end{exampleblock}
+	\begin{exampleblock}{Sample efficency}
+		Action-space and state-space are very large in CASs, so the problem of sample efficiency (i.e. how many samples does the RL need to reach a good policy?)
+		arise as in the Deep Learning context. 
+	\end{exampleblock}
+\end{frame}
 
+\begin{frame}{On sample efficency: Example of learning time }
+	\begin{exampleblock}{A Nowadays problem..}
+		\begin{itemize}
+			\item Nowadays, Deep Learning Techniques are used to train complex neural networks
+			\item When applied to Reinforcement Learning, the traning phase requires millions of interactions for an agent to learn
+			\item In the Multi Agent Setting is even worst..
+			\item In~\cite{DBLP:journals/corr/abs-1807-01281} they train 30 agents in 450k games!
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+\begin{frame}{On scalability: Single Agent Learner Example}
+	\begin{exampleblock}{Learning setting}
+		\begin{itemize}
+			\item A central agent (i.e. in the cloud? In a server?) see the entire system
+			\item Standard RL algorithm (tabular) create a table with the size of $|S \times A|$
+			\item But the system-wide action space is the cartesian product of the agent action-space, so the A cardinality is $|A|^N$
+			\item With 100 agents, we already reach an action space with more action than the particle in the universe.
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+%/////////
+\begin{frame}{Learning in CAS: Our today focus}
+	\begin{alertblock}{Constraints}
+		\begin{itemize}
+			\item Learning in cooperative systems: i.e. each entity share the same reward fuctions
+			\item Learning in homogeneous systems: i.e. each entity is interchangable with each other
+			\item We consider partial observability not as a core problem
+		\end{itemize}
+	\end{alertblock}
+	\begin{exampleblock}{Homogenous system: Implications}
+		\begin{itemize}
+			\item The optimal policy is the same for the whole system
+			\item During the learning, the system can use different policy (e.g. to reduce sample efficency)
+			\item We reduce the action space
+			\item We reduce the non-stationarity problem
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Learning in CAS: Models}
+		
+	%\begin{exampleblock}{Dec-POMDP $\mathcal{D}$ \href{http://rbr.cs.umass.edu/camato/decpomdp/overview.html}{\faLink}}
+	%	\begin{itemize}
+	%		\item Combination of Stochastic games and POMDP
+	%		\item $\mathcal{D}$ is a tuple $(N, S, \{A^i\}, P, \{R^i\}, \{{\Omega^{i}}\}O)$
+	%		\item For brevity, $\{ \mathfrak{X}^i\} = \{\mathfrak{X}^i\}_{i \in \{1, ..., N\}}$
+	%		\item $N, S, \{A^i\}, P, \{R^i\}$ are the same variables defined in Stochastic games
+	%		\item $\{\Omega^{i}\}$ is the same variable defined for POMDP
+	%		\item ${\Omega} = \{\Omega^1 ... \Omega^N \}$  is the joint observation space
+	%		\item $O: \mathbb{A} \times S \rightarrow \mathcal{P}(\Omega) $ is the global observation function
+	%	\end{itemize}
+	%\end{exampleblock}
+	%\begin{exampleblock}{Problems}
+	%	\begin{itemize}
+	%		\item The homogeneity is not captured by the model (different action, observation, and reward spaces)
+	%	\end{itemize}
+	%\end{exampleblock}
+	\begin{exampleblock}{Dec-POMDP \href{http://rbr.cs.umass.edu/camato/decpomdp/overview.html}{\faLink}}
+		\begin{itemize}
+			\item Extension of POMDP to Multi Agent settings
+			\item N agent act in a Markovian environment \emph{but} they perceive only partial information about it (observations)
+			\item[\faExclamation] Does not consider homogeneity
+		\end{itemize}
+	\end{exampleblock}
+	\begin{exampleblock}{SwarMDP~\footnote[frame]{\fullcite{DBLP:journals/corr/SosicKZK16}}}
+		\begin{itemize}
+			\item Consider an homogeneous population of agents (i.e. same action, observation space and same policy)
+			\item Learning lead to single policy that map observation (not history) to action
+			\item[\faExclamation] Time continuinig to be synchrnous
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Learning in CAS: A simplified model}
+	\begin{exampleblock}{}		
+		\begin{itemize}
+			\item Each agent is seen as a tuple $(M, \mathcal{N})$
+			\item $M$ is a local markov decision process ($S$ is an observation space in common with the entire system)
+			\item The global state system state is unknown
+			\item Agents want to learn a policy $\pi(a | s, \mathcal{N})$ to share to the entire system
+			\item When agent does not consider neighbours, we call the system as \emph{Independent learners}
+			\item When agent consider neighbours action to choose their local action, we call the system as \emph{Joint action learners} 
+		
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+%===============================================================================
+\section{Independent Learners}
+\begin{frame}{Independent Learners}
+	\begin{exampleblock}{Configuration}
+		\begin{itemize}
+			\item Each agent learn concurrently an optimal local policy
+			\item This lead to the global optimal policies as an emergent behaviour
+			\item The homogeneity is driven by the same reward function and action/observation spaces
+			\item More agent lead to a more exploration
+			\item Not converge to global optimum, but good pratical performance are founded in various works: \cite{DBLP:conf/atal/TumerA07, DBLP:conf/atal/TumerAW02, DBLP:conf/iros/WangS06}
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+\begin{frame}{Independent Learners}
+	\begin{exampleblock}{Implications}
+		\begin{itemize}
+			\item [{\color{teal} \faThumbsUp}] \emph{Scalable}: the learning algorithm does not depend to the system size
+			\item [{\color{teal} \faThumbsUp}] \emph{Easy to implement}: the algorithm are the same developed for single agent context
+			\item [{\color{teal} \faThumbsUp}] \emph{Offline and Online}: Can be used both at simulation time or at runtime
+			\item [{\color{red} \faThumbsDown}] \emph{Increase non-stationarity}: the environment dynamics change continously as the agent learn new policy
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+%===============================================================================
+\begin{frame}{Decentralised Q-Learning}
+	\begin{exampleblock}{Idea}
+		\emph{Each agent is a Q-Learner and does consider other agents as a part of the environment}
+	\end{exampleblock}
+
+	\begin{exampleblock}{Considerations}
+		\begin{itemize}
+			\item[{\color{teal} \faThumbsUp}] Simplest extension of Q-Learning into the multi agent domain
+			\item[{\color{red} \faThumbsDown}] Need to use Greedy in the Limit of Infinite Exploration (GLIE) policy to reach good performance
+			\item[{\color{red} \faThumbsDown}] Complex and aplication dependant parameter tuning
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Hysteretic Q-Learning\footnote[frame]{\fullcite{matignon2007hysteretic}}}
+	\begin{alertblock}{Idea}
+		\begin{itemize}
+			\item Decentralised Q-Learning does not take in consideration non-stationarity problem
+			\item An idea could be to apply a \emph{correction} factor that reduce the non-stationarity born for the concurrent learning
+			\item Hysteretic Q-Learning uses an \emph{hysteresis} heurestic to handle this problem
+			\item It suppose an optimistic behaviour, giving more weight to good action then the bad action (\emph{due to the exploration of nearby agents})
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}{Hysteretic Q-Learning}
+	\begin{exampleblock}{Implementation}
+		\begin{itemize}
+			\item Use two learning factor, $\alpha$ and $\beta$, with $\alpha > \beta$
+			\item The Q update is evaluated to consider the goodness of an action/space pair: $\delta(s, a) = r_t + \gamma * argmax_{a'}Q(s_t, a') - Q(s_t, a_t)$
+			\item When $\delta > 0$ it means that we improve our experience, so we use $\alpha$ as learning rate, $\beta$ otherwise
+			\item The Q update became: $ Q(s_t, a_t) =
+			\begin{cases}
+				Q(s_t, a_t) + \alpha{\delta(s_t, a_t)} & \text{if} (\delta(s_t, a_t)) > 0 \\
+				Q(s_t, a_t) + \beta{\delta(s_t, a_t)} & \text{otherwise}
+			\end{cases} $
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Hysteretic Q-Learning}
+	\begin{exampleblock}{}
+		\begin{itemize}
+			\item[{\color{teal} \faThumbsUp}] It improve standard Q-Learning performance without adding more complexity
+			\item[{\color{teal} \faThumbsUp}] It is currently used in Deep Reinforcement Learning to handle complex System
+			\item[{\color{red} \faThumbsDown}] It is an heurestic, so it does not have any theoretical guarantes
+			\item Other extension follow this idea and suffer from the same pros and cons. The most famous are Distributed Q-Learning, Lenient Q-Learning, Win-Or-Learn-fast
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+%===============================================================================
+\section{Joint Action Learners}
+
+\begin{frame}{Joint Action Learners}
+	\begin{alertblock}{From Independent to Joint actions}	
+		\begin{itemize}
+			\item Independent learners tend to make the environment highly non-stationarity
+			\item Ideally, we can reduce it by create policy that observe other agents actions (tipycally denoted by: $\pi_{i,-i}$))
+			\item This does not scale with the agent population.
+			\item A possibility to reduce the space is to consider only the neighbours (in a tipycally CAS settings)
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+\begin{frame}{QD-Learning}
+
+\end{frame}
+
+\begin{frame}{Neighbours Q-Learning}
+
+\end{frame}
+%===============================================================================
+
+
+%===============================================================================
+\section{Advanced Topics}
+\begin{frame}{Centralised Learning and Distributed Control: Overview}
+
+\end{frame}
+
+\begin{frame}{Policy Gradient Methods}
+
+\end{frame}
+
+\begin{frame}{Actor-Critic Methods}
+
+\end{frame}
+\begin{frame}{Handling Partial Observability}
+
+\end{frame}
+
+\begin{frame}{Handling large scale systems}
+
+\end{frame}
+
+\begin{frame}{Handling multi agent credit assigment problem}
+
+\end{frame}
+
+\begin{frame}{Not explored issue: Global clock}
+
+\end{frame}
+%===============================================================================
+
+%% Parla di come gestire l'osservabilità parziale
+%% Parla delle tecniche Actor-Critic associate al centralised learning, decentralised execution
+%% Parla di Reinforce
 
 %===============================================================================
 \section*{}
@@ -354,14 +577,12 @@ This template's sources can be used as a simple example of how yo use this Beame
 %%%%
 \setbeamertemplate{page number in head/foot}{}
 %/////////
-\begin{frame}[c,noframenumbering]{\refname}
+\begin{frame}[c,noframenumbering, allowframebreaks]{\refname}
 %\begin{frame}[t,allowframebreaks,noframenumbering]{\refname}
 %	\tiny
 	\scriptsize
-%	\footnotesize
-	\bibliographystyle{apalike}
-%	\bibliographystyle{alpha}
-	\bibliography{AMSBolognaFC-template}
+	\nocite{*}
+	\printbibliography
 \end{frame}
 %/////////
 
