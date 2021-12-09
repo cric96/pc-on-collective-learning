@@ -64,17 +64,17 @@
 %/////////
 \begin{alertblock}{Motivation}
 	\begin{itemize}
-		\item Learning is a key aspect to drive \emph{adaptivity} (by reason under uncertainty)
+		\item Learning is a key mechanism to drive \emph{adaptivity}
 		\item Intelligent agents improve their performance with \emph{experience}
 		\item We would like to improve adaptiveness with raw experience and, hence 
-		\item We would like to bring Reinforcement Learning methodology in such kind of systems
+		\item We would like to bring Reinforcement Learning methodology in CAS
 	\end{itemize}
 \end{alertblock}
 \begin{alertblock}{Lecture goals}
 	\begin{itemize}
 		\item Understanding the challenges related to the Multi-Agent System (MAS) domain
-		\item Show Techniques, Patterns, and Architecture applied in Collective Systems
-		\item Hands-on in some practical example of Collective Learning
+		\item Show Techniques, Patterns, and Architecture applied in \emph{Collective} Systems
+		\item Hands-on in some practical example of \emph{Collective} Learning
 	\end{itemize}
 \end{alertblock}
 %
@@ -88,15 +88,15 @@
 	\begin{itemize}
 		\item Markov Decision Process (MDP) to model the agent-environment interactions
 		\item Find a learning process that eventually leads to an \emph{optimal} policy $\pi^*$
-		\item Q-Learning (in general \emph{value-based approaches}) as a prominent algorithm case to reach converge
+		\item Q-Learning (in general \emph{value-based approaches}) as a prominent algorithm to reach converge
 	\end{itemize}
 \end{exampleblock}
-\begin{alertblock}{\dots But this works only under some conditions}
+\begin{alertblock}{\dots But plain RL works only under some conditions}
 	\begin{itemize}
 		\item Reward hypothesis
 		\item Full environment observability and Markovian property
 		\item Stationary environment
-		\item State/Action space should be small enough to be stored in memory (otherwise, we should leverage function approximators)
+		\item State/action space should be small enough to be stored in memory (otherwise, we should leverage function approximators)
 	\end{itemize}	
 \end{alertblock}
 \end{frame}
@@ -104,7 +104,7 @@
 \begin{frame}{Partial Observable environments}
 %/////////
 	\begin{alertblock}{Definition}
-		An agent do not have a \emph{perfect} and \emph{complete} knowledge perception of the state of the environment
+		An agent do not have a \emph{perfect} and \emph{complete} knowledge of the state of the environment
 	\end{alertblock}
 	\begin{exampleblock}{They are quite typical in (non-)complex systems}
 		\begin{itemize}
@@ -123,7 +123,7 @@
 			\item $S, A, T, R$ are the same variable described in MDP
 			\item $\Omega$ is the set of observations perceived by the agent $\{o_1, \dots, o_n\}$
 			\item $O$ is the set of conditional probability $O(o | s, a)$
-			\item I want to learn a policy that depends on $o$ but maximise a reward function that depends on $s$
+			\item I want to learn a policy that depends on $o$ but that maximises a reward function that depends on $s$
 			\item The agents need to build a belief state from the history of the observations
 		\end{itemize}
 	\end{exampleblock}
@@ -132,13 +132,13 @@
 \begin{frame}[c]{Non-stationary environments}
 %/////////
 	\begin{alertblock}{Definition}
-		The environment model (e.g. the random variable associated with it) change 
+		The environment model (e.g. the random variable associated with it) changes
 		over time.
 	\end{alertblock}
 	\begin{exampleblock}{MDP are Stationary by definition \dots}
 		\begin{itemize}
 			\item \dots But, real-case environment dynamics could change over time (e.g. markets, city traffic, routing networks)
-			\item Practically, it seems that RL (in particular Temporal Difference (TD) methods) works well even in this case (online learning)
+			\item Practically, it seems that RL (in particular Temporal Difference (TD) methods) works well even in this case
 			\item \emph{But, we lose convergence guarantees.}
 		\end{itemize}
 	\end{exampleblock}
@@ -181,8 +181,8 @@
 %/////////
 	\begin{alertblock}{}
 		\begin{itemize}
-			\item Extension of MDP to the MAS regime
-			\item Common abstraction in MARL algorithm
+			\item Extension of MDP to the MAS context
+			\item Common abstraction in MARL algorithms
 		\end{itemize}
 	\end{alertblock}
 	\begin{alertblock}{Definition}
@@ -227,7 +227,7 @@
 	\begin{exampleblock}{Competitive}
 		\begin{itemize}
 			\item Agents compete with each other to maximise a long term return
-			\item Board Games, Video games
+			\item Board Games, Video games, \dots
 		\end{itemize}
 	\end{exampleblock}
 	\begin{exampleblock}{Mixed}
@@ -240,13 +240,13 @@
 \begin{frame}{On Cooperative Task}
 	\begin{exampleblock}{Homogeneous}
 		\begin{itemize}
-			\item Each agent has the same capability ($A^1 = \dots = A^N$)
+			\item Each agent has same capabilities ($A^1 = \dots = A^N$)
 			\item The overall goal is to find the best policy that is the same for each agent ($\pi^* = {\pi^{*}}_1 \dots {\pi^{*}}_N$)
 		\end{itemize}
 	\end{exampleblock}
 	\begin{exampleblock}{Heterogeneous}
 		\begin{itemize}
-			\item Each agent could have different capabilities (in the worst case, $A^1 \neq \dots \neq A^N$)
+			\item Each agent could has different capabilities (in the worst case, $A^1 \neq \dots \neq A^N$)
 			\item Each agent has its local policy that should be maximised following the global collective goal
 		\end{itemize}
 	\end{exampleblock}
@@ -259,7 +259,7 @@
 			\item \emph{One} agent with a global view of the system (in the cloud? in a server?)
 			\item Nodes send their perception to that central agent
 			\item With this perceptions, it creates a global state of the system
-			\item With the current policy, it chooses the action that nodes should performance and send to them (\emph{Control})
+			\item With the current policy, it chooses the actions that nodes should performance (\emph{Control})
 			\item In the next time step, it evaluates the reward function and updates the policy accordingly (\emph{Learn})
 			\item \emph{Are the nodes agents?}
 			\item Both used in offline and pure-online setting
@@ -275,7 +275,7 @@
 	\begin{exampleblock}{Decentralised Learning and Distributed Execution}
 		\begin{itemize}
 			\item Each node has its local policy/value table
-			\item They can perceive the environment state (or can observe a part of it)
+			\item They can perceive the environment state (or they can observe a part of it)
 			\item With the current state, they perform an action following their local policy (\emph{Control})
 			\item In the next time step, they update their policy following a local reward function 
 			\item Both used in offline and pure-online setting
@@ -292,7 +292,7 @@
 			\begin{itemize}
 				\item Each node follow the typical $o_t, a_t, o_{t+1}, a_{t+1},\dots $ trajectory using a local policy
 				\item After an episode, this trajectory (or something derived from it) will be sent to a central learner
-				\item It, using a global view of the system, improve the policies of the agents 
+				\item It, using a global view of the system, improves the policies of the agents 
 				\item At the end of the training phase, the policy will be shared with the agents
 			\end{itemize} 
 			\item \emph{Execution time}
@@ -308,7 +308,7 @@
 \section{Learning in CAS}
 %===============================================================================
 \begin{frame}[c]{Learning in Collective Adaptive System~\footnote[frame]{\fullcite{DBLP:conf/icse/DAngeloGGGNPT19}}}
-\begin{exampleblock}{}
+\begin{exampleblock}{Constraints}
 	\begin{itemize}
 		\item The collective goal could be accomplished through competition and/or cooperation 
 		\item The system could be heterogeneous or homogeneous
@@ -323,7 +323,7 @@
 		Each agent could only perceive a part of the system through its sensors.
 	\end{exampleblock}
 	\begin{alertblock}{Learning in CASs make the environments non-stationary}
-		Each agent learns concurrently $\implies$ by the eye of the other agent the environment is in continuous changes.
+		Each agent learns concurrently $\implies$ by the eye of an agent the environment is in continuous evolution.
 	\end{alertblock}
 	\begin{alertblock}{The course of dimensionality -- MAS combinatorial nature}
 		When we have to deal with a large number of agents, the overall state-action space is increasing exponentially to the number of agents --- so a central learner cannot solve the learning problem.
@@ -351,17 +351,17 @@
 			\item Nowadays, Deep Learning Techniques are used to train complex neural networks
 			\item When applied to Reinforcement Learning, the training phase requires millions of interactions for an agent to learn
 			\item In the Multi-Agent Setting is even worst \dots
-			\item In~\cite{DBLP:journals/corr/abs-1807-01281} they train 30 agents in 450k games!
+			\item In \footnote[frame]{\fullcite{DBLP:journals/corr/abs-1807-01281}} they train 30 agents in 450k games!
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 \begin{frame}{On scalability: Single Agent Learner Example}
 	\begin{exampleblock}{Learning setting}
 		\begin{itemize}
-			\item A central agent (i.e. in the cloud? In a server?) see the entire system
+			\item A central agent (i.e. in the cloud? In a server?) sees the entire system
 			\item Standard RL algorithm (tabular) create a table with the size of $|S \times A|$
 			\item But the system-wide action space is the cartesian product of the agent action-space, so the A cardinality is $|A|^N$
-			\item With 100 agents,we have already reached an action space with more action then the particle in the universe.
+			\item With 100 agents with 10 possible action, we have already reached an action space with more action then the particle in the universe ($\sim 10^{80}$ \href{https://en.wikipedia.org/wiki/Eddington_number}{\faLink}).
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
@@ -369,17 +369,17 @@
 \begin{frame}{Learning in CAS: Our today focus}
 	\begin{alertblock}{Constraints}
 		\begin{itemize}
-			\item Learning in cooperative systems: i.e. each entity share the same reward functions
+			\item Learning in cooperative systems: i.e. each entity shares the same reward functions
 			\item Learning in homogeneous systems: i.e. each entity is interchangeable with each other
-			\item We do not consider partial observability as a core problem
+			\item[\faExclamationTriangle] We do not consider partial observability as a core problem
 		\end{itemize}
 	\end{alertblock}
 	\begin{exampleblock}{Homogenous system: Implications}
 		\begin{itemize}
-			\item The optimal policy is the same for the whole system
-			\item During the learning, the system can use different policies (e.g. to reduce sample efficiency)
-			\item We reduce the action space
-			\item We reduce the non-stationarity problem
+			\item[{\color{teal}\faThumbsUp}] The optimal policy is the same for the whole system
+			\item[{\color{teal}\faThumbsUp}] During the learning phases, the system can use different policies (e.g. to reduce sample efficiency)
+			\item[{\color{teal}\faThumbsUp}] We reduce the action space
+			\item[{\color{teal}\faThumbsUp}] We reduce the non-stationarity problem
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
@@ -406,14 +406,14 @@
 		\begin{itemize}
 			\item Extension of POMDP to Multi-Agent settings
 			\item N agent act in a Markovian environment \emph{but} they perceive only partial information about it (observations)
-			\item[\faExclamation] Does not consider homogeneity
+			\item[\faExclamationTriangle] Does not consider homogeneity
 		\end{itemize}
 	\end{exampleblock}
 	\begin{exampleblock}{SwarMDP~\footnote[frame]{\fullcite{DBLP:journals/corr/SosicKZK16}}}
 		\begin{itemize}
 			\item Consider a homogeneous population of agents (i.e. same action, observation space and same policy)
 			\item Learning lead to a single policy that map observation (not history) to action
-			\item[\faExclamation] Time continuing to be synchronous
+			\item[\faExclamationTriangle] Time continuing to be synchronous
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
@@ -435,11 +435,10 @@
 \begin{frame}{Learning in CAS: Can we use standard RL algorithms?}
 	\begin{exampleblock}{In a centralised learning decentralised execution settings}
 		\begin{itemize}
-			\item Each agent explore the environment with the same policy $\phi$
+			\item Each agent explores the environment with the same policy $\phi$
 			\item Central learners improve the policy following the agents' perceptions
 			\item When a \emph{good} policy is found, it is deployed in a concrete system
 			\item Then, the central learner is not required anymore
-
 		\end{itemize}
 	\end{exampleblock}
 	\begin{exampleblock}{\emph{Ideally} yes \dots}
@@ -468,7 +467,7 @@
 		\begin{itemize}
 			\item [{\color{teal} \faThumbsUp}] \emph{Scalable}: the learning algorithm does not depend on the system size
 			\item [{\color{teal} \faThumbsUp}] \emph{Easy to implement}: the algorithm is the same developed for single agent context
-			\item [{\color{teal} \faThumbsUp}] \emph{Offline and Online}: Can be used both at simulation time or at runtime
+			\item [{\color{teal} \faThumbsUp}] \emph{Offline and Online}: Can be used both at simulation time or at deployment time
 			\item [{\color{red} \faThumbsDown}] \emph{Increase non-stationarity}: the environment dynamics change continuously as the agent learns a new policy
 		\end{itemize}
 	\end{exampleblock}
@@ -476,14 +475,14 @@
 %===============================================================================
 \begin{frame}{Decentralised Q-Learning\footnote{\fullcite{DBLP:conf/icml/Tan93}}}
 	\begin{exampleblock}{Idea}
-		\emph{Each agent is a Q-Learner and does consider other agents as a part of the environment}
+		\emph{Each agent is a Q-Learner and he does consider other agents as a part of the environment}
 	\end{exampleblock}
 
 	\begin{exampleblock}{Considerations}
 		\begin{itemize}
 			\item[{\color{teal} \faThumbsUp}] Simplest extension of Q-Learning into the Multi-Agent domain
 			\item[{\color{red} \faThumbsDown}] Need to use Greedy in the Limit of Infinite Exploration (GLIE) policy to reach good performance
-			\item[{\color{red} \faThumbsDown}] Complex and application dependant parameter tuning
+			\item[{\color{red} \faThumbsDown}] Complex and application-dependant parameters tuning
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
@@ -503,9 +502,9 @@
 	\begin{exampleblock}{Implementation}
 		\begin{itemize}
 			\item Use two learning factors, $\alpha$ and $\beta$, with $\alpha > \beta$
-			\item The Q update is evaluated to consider the goodness of an action/space pair: $\delta(s, a) = r_t + \gamma * argmax_{a'}Q(s', a') - Q(s_t, a_t)$
+			\item The Q-table update is evaluated to consider the goodness of an action/space pair: $\delta(s, a) = r_t + \gamma * argmax_{a'}Q(s', a') - Q(s_t, a_t)$
 			\item When $\delta > 0$ it means that we improve our experience, so we use $\alpha$ as learning rate, $\beta$ otherwise
-			\item The Q update became: $ Q(s_t, a_t) =
+			\item The Q-table update became: $ Q(s_t, a_t) =
 			\begin{cases}
 				Q(s_t, a_t) + \alpha{\delta(s_t, a_t)} & \text{if} (\delta(s_t, a_t)) > 0 \\
 				Q(s_t, a_t) + \beta{\delta(s_t, a_t)} & \text{otherwise}
@@ -679,7 +678,7 @@
 			\item As I mentioned, CAS are partially observable \dots
 			\item \dots But the methods proposed does not handle this matter in any sense
 			\item Recurrent Neural Networks (i.e. Neural Networks with \emph{memory}) are an emergent trend to handle this issue
-			\item In MAS settings, RNNs and Hysteretic updates are used together to handle both non-stationarity and partial observability
+			\item In MAS settings, RNNs and Hysteretic updates are used together to handle both non-stationarity and partial observability~\footnote[frame]{\fullcite{DBLP:conf/icml/OmidshafieiPAHV17}}
 			\item[{\color{red} \faThumbsDown}] It is not clear if RNNs are a solution for Partial Observability
 		\end{itemize}
 	\end{exampleblock}
