@@ -674,19 +674,63 @@
 \end{frame}
 
 \begin{frame}{Handling Partial Observability}
-
+	\begin{exampleblock}{}
+		\begin{itemize}
+			\item As I mentioned, CAS are partially observable \dots
+			\item \dots But the methods proposed does not handle this matter in any sense
+			\item Recurrent Neural Network (i.e. Neural Network with \emph{memory}) are an emergent trend to handle this issues
+			\item In MAS settings, RNNs and Hysteretic update are used togheter to handle both non-stationarity and partial observability
+			\item[{\color{red} \faThumbsDown}] It is not clear if RNNs are really a solution for Partial Observability
+		\end{itemize}
+	\end{exampleblock}
 \end{frame}
 
 \begin{frame}{Handling large scale systems}
+	\begin{exampleblock}{}
+		\begin{itemize}
+			\item Agent size was not a central problem in first MARL works
+			\item Independent learners are typically deployed when we have to deal with several agent \dots
+			\item \dots but it makes the learning process noising
+			\item Lately, a novel trend consist in the Mean Field Reinforcement Learning
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
 
+\begin{frame}{Handling large scale systems: On Mean Field Reinforcement Learning}
+	\begin{exampleblock}{}
+		\begin{itemize}
+			\item The learning problem is set up as a joint action learners
+			\item In mean field, the system in model as two agent, the main agent and the rest 
+			\item In Mean Field Reinforcement Learning, the rest is computed as the mean action taken by the neighbourhood
+			\item[{\color{teal}\faThumbsUp}] It has theoretical guarantee
+			\item[{\color{teal}\faThumbsUp}] It is easily used also in CAS
+			\item[{{\color{red}\faThumbsDown}}] The approaches proposed are offline --- no online adaptiation.
+		\end{itemize}
+	\end{exampleblock}
 \end{frame}
 
 \begin{frame}{Handling Multi-Agent credit assignment problem}
-
+	\begin{exampleblock}{}
+		\begin{itemize}
+			\item In CAS settings, typically we have a global reward function
+			\item[{\color{red} \faThumbsDown}] It is hard to understand the influence of an agent action to that signal
+			\item This is know as Multi-Agent credit assignment problem
+			\item It is tackle in COIN approach (i.e. differential reward) \dots
+			\item \dots but is require to run several simulation to understand each agent influence
+			\item COMA is a novel approach that uses a Actor-Critic setting with a contrafacutal baseline 
+		\end{itemize}
+	\end{exampleblock}
 \end{frame}
 
 \begin{frame}{Not explored issue: Global clock}
-
+	\begin{exampleblock}{}
+		\begin{itemize}
+			\item Works on Multi Agent Reinforcement Learning consider Stochastic games as the environments model
+			\item There, agents action synchrnously, i.e. at the time step t+1 all agents have done their action
+			\item This is impossible to assume in CAS
+			\item Any ideas? Lamport logical clock?
+		\end{itemize}
+	\end{exampleblock}
 \end{frame}
 %===============================================================================
 
@@ -711,8 +755,7 @@
 %/////////
 \begin{frame}[c,noframenumbering, allowframebreaks]{\refname}
 %\begin{frame}[t,allowframebreaks,noframenumbering]{\refname}
-%	\tiny
-	\scriptsize
+	\tiny
 	\nocite{*}
 	\printbibliography
 \end{frame}
