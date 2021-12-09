@@ -323,7 +323,7 @@
 		Each agent could only perceive a part of the system through its sensors.
 	\end{exampleblock}
 	\begin{alertblock}{Learning in CASs make the environments non-stationary}
-		Each agent learns concurrently, so by the eye of the other agent the environment is in continuous changes.
+		Each agent learns concurrently $\implies$ by the eye of the other agent the environment is in continuous changes.
 	\end{alertblock}
 	\begin{alertblock}{Course of dimensionality -- MAS combinatorial nature}
 		When we have to deal with a large number of agents, the overall state-action space is increasing exponentially to the number of agents --- so a central learner cannot solve the learning problem.
@@ -336,11 +336,11 @@
 		the overall collective behaviour.
 	\end{exampleblock}
 	\begin{exampleblock}{A lack of a global clock}
-		CASs are distributed systems, so a global synchronization clock does not exist, making the standard
+		CASs are distributed systems $\implies$ a global synchronization clock does not exist, making the standard
 		Stachocastic game model quinte inaquate.
 	\end{exampleblock}
 	\begin{exampleblock}{Sample efficency}
-		Action-space and state-space are very large in CASs, so the problem of sample efficiency (i.e. how many samples does the RL need to reach a good policy?)
+		Action-space and state-space are very large in CASs $\implies$ the problem of sample efficiency (i.e. how many samples does the RL need to reach a good policy?)
 		arise as in the Deep Learning context. 
 	\end{exampleblock}
 \end{frame}
@@ -602,19 +602,77 @@
 %===============================================================================
 \section{Advanced Topics}
 \begin{frame}{State of the art: on advanced topics}
-	
+	\begin{exampleblock}{Deep Learning as a mechanism to solve complex tasks}
+		\begin{itemize}
+			\item Nowadays, Deep Learning architecture are typically used in MARL
+			\item For handling non-stationarity, \emph{actor-critic} methodology are used
+			\item For handling partial-observability, \emph{recurrent} networks are applied
+			\item For handling large-state/action space, \emph{deep architecture} are considered
+			\item[{\color{red}\faThumbsDown}] are all \emph{heurestic} $\implies$ some approach could does not work in different aplication
+		\end{itemize}
+	\end{exampleblock}
 \end{frame}
-\begin{frame}{Centralised Learning and Distributed Control: Overview}
 
+\begin{frame}{On Actor-Critic: Policy Gradient Methods}
+	\begin{exampleblock}{}
+		\begin{itemize}
+			\item What we see so far are \emph{value-based} methods $\implies$ learn value function that guide the agent's policy
+			\item[\faLightbulbO] Why we cannot learn the policy \emph{directly}?
+			\item In some case, the value function could be very complex but not the policy
+			\item Futhermore, value-based method lead to determistic policy, but in some case only a \emph{stochastic} policy is the best one (e.g. in Rock paper scissor)
+		\end{itemize}
+	\end{exampleblock}
 \end{frame}
 
-\begin{frame}{Policy Gradient Methods}
+\begin{frame}{On Actor-Critic: Policy Gradient Methods}
 
+	\begin{alertblock}{Idea}
+		\begin{itemize}
+			\item Optimizing the policy ($ \pi(a | s, \theta) $) w.r.t the exceptected return by gradient descent (or ascent).
+			\item $\pi(a | s, \theta)$ is read as: the probability of the action $a$ knowing the state $s$ and the weight $\theta$
+			\item Generally, the loss function is described as: $J(\theta) = E{\sum_{i = 0}^T}(\gamma * R_i)$
+			\item The weight then, are updated as: $ \theta_{t+1} = \theta_t + \alpha \nabla J(\theta_t) $ $\implies$ standard Stachocastic gradient descent (ascent)
+		\end{itemize}
+	\end{alertblock}
+
+	\begin{exampleblock}{Considerations}
+		\begin{itemize}
+			\item[{\color{teal} \faThumbsUp}] Convergence proof to local optimal
+			\item[{\color{red}} \faThumbsDown] Tends to have high variance (overfitting)
+		\end{itemize}
+	\end{exampleblock}
 \end{frame}
 
-\begin{frame}{Actor-Critic Methods}
-
+\begin{frame}{On Actor-Critic: Learning description}
+	\begin{alertblock}{Idea}
+		\begin{itemize}
+			\item Combine Policy Gradient and Value-Based Methods
+			\item The Critic (the value function) is updated like standard value approaches (e.g. TD errors)
+			\item The actor (the policy) is updated using the policy gradient update based on the critic estimation
+		\end{itemize}
+	\end{alertblock}
+	\begin{figure}
+		\includegraphics[height=3cm]{example-image-b}
+	\end{figure}
 \end{frame}
+
+\begin{frame}{On Actor-Critic: MARL settings}
+	\begin{alertblock}{Idea}
+		\begin{itemize}
+			\item The Actor are local policy, that take observation as input and return local action
+			\item The Critic instead, is placed in a central server
+			\item The Critic have a global view of the system $\implies$ it could use overall state information 
+			\item The Actor is then influenced with global data, but at \emph{deployment} time it does not use it
+		\end{itemize}
+	\end{alertblock}
+	\begin{exampleblock}{Considerations}
+		\begin{itemize}
+			\item[{\color{teal} \faThumbsUp}] A balanced between fully decentralised and centralised method
+			\item[{\color{red} \faThumbsDown}] Require simulations $\implies$ cannot be used in online systems  
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
 \begin{frame}{Handling Partial Observability}
 
 \end{frame}
