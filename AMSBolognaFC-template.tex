@@ -84,14 +84,14 @@
 %/////////
 \begin{frame}[c, fragile]{Single-Agent Learning}
 %/////////
-\begin{exampleblock}{What have you seen so far ...}
+\begin{exampleblock}{What have you seen so far \dots}
 	\begin{itemize}
 		\item Markov Decision Process (MDP) to model the agent-environment interactions
 		\item Find learning process that eventually lead to an \emph{optimal} policy $\pi^*$
 		\item Q-Learning (in general \emph{value-based approaches}) as a prominient algorithm case to reach converge
 	\end{itemize}
 \end{exampleblock}
-\begin{alertblock}{... But this works only under some conditions}
+\begin{alertblock}{\dots But this works only under some conditions}
 	\begin{itemize}
 		\item Reward hypothetesis
 		\item Full environment observability and Markovian property
@@ -108,7 +108,7 @@
 	\end{alertblock}
 	\begin{exampleblock}{They are quite typical in (non-)complex systems}
 		\begin{itemize}
-			\item Card-games (poker, black-jack, ...) --- Why?
+			\item Card-games (poker, black-jack, \dots) --- Why?
 			\item A driving card
 			\item Swarm of drones
 		\end{itemize}
@@ -121,7 +121,7 @@
 			\item Agent cannot directly observe the system state, but he can make an \emph{observation} that depend on this state
 			\item POMDP is a tuple $(S, A, T, R, \Omega, O)$
 			\item $S, A, T, R$ are the same variable described in MDP
-			\item $\Omega$ is the set of observation perceive by the agent $\{o_1, ..., o_n\}$
+			\item $\Omega$ is the set of observation perceive by the agent $\{o_1, \dots, o_n\}$
 			\item $O$ is the set of conditional probability $O(o | s, a)$
 			\item I want to learn a policy that depends on $o$ but maximise a reward function that depends on $s$
 			\item The agents need to build a belif state from the observations history
@@ -135,9 +135,9 @@
 		The environment model (e.g. the random variable associated with it) change 
 		over the time.
 	\end{alertblock}
-	\begin{exampleblock}{MDP are Stationary by definition ...}
+	\begin{exampleblock}{MDP are Stationary by definition \dots}
 		\begin{itemize}
-			\item ... But, real-case environment dynamics could change over time (e.g. markets, city trafic, routing networks)
+			\item \dots But, real-case environment dynamics could change over time (e.g. markets, city trafic, routing networks)
 			\item Pratically, it seems that RL works well even in this case (online learning)
 			\item \emph{But, we loose converge guarantee.}
 		\end{itemize}
@@ -187,13 +187,13 @@
 	\end{alertblock}
 	\begin{alertblock}{Definition}
 		\begin{itemize}
-			\item $\mathcal{S}$ is a tuple $<N, S, \{A^i\}_{i \in \{ 1, ..., N\}}, P, \{R^i\}_{i \in \{ 1, ..., N\}}>$
+			\item $\mathcal{S}$ is a tuple $<N, S, \{A^i\}_{i \in \{ 1, \dots, N\}}, P, \{R^i\}_{i \in \{ 1, \dots, N\}}>$
 			\item $N$ is the number of agents ($|N| > 1 $)
 			\item $S$ is the global environment state
-			\item $A^i$ is the action state of agent $i$. $\mathbb{A} := A^1 \times ...\times A^N$ is the joint action space
+			\item $A^i$ is the action state of agent $i$. $\mathbb{A} := A^1 \times \dots\times A^N$ is the joint action space
 			\item $P: S x \mathbb{A} \rightarrow \mathcal{P}(S)$ is the state transaction. $\mathcal{P}$ is a discrete probabilistic distribution (associate for each $s \in S$ a probability)
 			\item $R^i: S \times \mathbb{A} \times S \rightarrow \mathbb{R}$ is the reward signal
-			\item Typical time evolution: $ S_0, \mathbb{A}_0, \mathbb{R}_1, S_1, ...  $
+			\item Typical time evolution: $ S_0, \mathbb{A}_0, \mathbb{R}_1, S_1, \dots  $
 		\end{itemize}
 	\end{alertblock}
 \end{frame}
@@ -221,7 +221,7 @@
 %/////////
 	\begin{alertblock}{Cooperative}
 		\begin{itemize}
-			\item Agents share the same reward function ($R^1 = ... = R^N$) in order to accomplish a collective goal
+			\item Agents share the same reward function ($R^1 = \dots = R^N$) in order to accomplish a collective goal
 		\end{itemize}
 	\end{alertblock}
 	\begin{exampleblock}{Competitive}
@@ -240,13 +240,13 @@
 \begin{frame}{On Cooperative Task}
 	\begin{exampleblock}{Homogeneous}
 		\begin{itemize}
-			\item Each agent has the same capability ($A^1 = ... = A^N$)
-			\item The overall goal is to find the best policy that is the same for each agent ($\pi^* = {\pi^{*}}_1 ... {\pi^{*}}_N$)
+			\item Each agent has the same capability ($A^1 = \dots = A^N$)
+			\item The overall goal is to find the best policy that is the same for each agent ($\pi^* = {\pi^{*}}_1 \dots {\pi^{*}}_N$)
 		\end{itemize}
 	\end{exampleblock}
 	\begin{exampleblock}{Heterogenoues}
 		\begin{itemize}
-			\item Each agent could have different capabilities (in the worst case, $A^1 \neq ... \neq A^N$)
+			\item Each agent could have different capabilities (in the worst case, $A^1 \neq \dots \neq A^N$)
 			\item Each agent has its local policy that should be maximised following the global collective goal
 		\end{itemize}
 	\end{exampleblock}
@@ -290,7 +290,7 @@
 			\item A offline-learning online execution patterns
 			\item \emph{Simulation time}
 			\begin{itemize}
-				\item Each node follow the typical $o_t, a_t, o_{t+1}, a_{t+1},... $ trajectory using a local policy
+				\item Each node follow the typical $o_t, a_t, o_{t+1}, a_{t+1},\dots $ trajectory using a local policy
 				\item After an episode, this trajectory (or something dirived from it) will be sent to a central learner
 				\item It, using a global view of the system, improve the policies of the agents 
 				\item At the end of the traning phase, the policy will be shared to the agent s
@@ -390,10 +390,10 @@
 	%	\begin{itemize}
 	%		\item Combination of Stochastic games and POMDP
 	%		\item $\mathcal{D}$ is a tuple $(N, S, \{A^i\}, P, \{R^i\}, \{{\Omega^{i}}\}O)$
-	%		\item For brevity, $\{ \mathfrak{X}^i\} = \{\mathfrak{X}^i\}_{i \in \{1, ..., N\}}$
+	%		\item For brevity, $\{ \mathfrak{X}^i\} = \{\mathfrak{X}^i\}_{i \in \{1, \dots, N\}}$
 	%		\item $N, S, \{A^i\}, P, \{R^i\}$ are the same variables defined in Stochastic games
 	%		\item $\{\Omega^{i}\}$ is the same variable defined for POMDP
-	%		\item ${\Omega} = \{\Omega^1 ... \Omega^N \}$  is the joint observation space
+	%		\item ${\Omega} = \{\Omega^1 \dots \Omega^N \}$  is the joint observation space
 	%		\item $O: \mathbb{A} \times S \rightarrow \mathcal{P}(\Omega) $ is the global observation function
 	%	\end{itemize}
 	%\end{exampleblock}
@@ -431,6 +431,25 @@
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
+
+\begin{frame}{Learning in CAS: Can we use standard RL algorithm?}
+	\begin{exampleblock}{In a centralised learning decentralised execution settings}
+		\begin{itemize}
+			\item Each agent explore the environment with the same policy $\phi$
+			\item A central learners improve the policy following the agents perception
+			\item When a \emph{good} policy is found, it is deployed in a real system
+			\item Then, the central learner it is not require anymore
+
+		\end{itemize}
+	\end{exampleblock}
+	\begin{exampleblock}{\emph{Ideally} yes \dots}
+		\begin{itemize}
+			\item \dots But this allow only offline learning
+			\item This pratically lead to lazy agent -- the exploration part is limited 
+			\item Does not consider other agent actions -- each agent act independently from each other
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
 %===============================================================================
 \section{Independent Learners}
 \begin{frame}{Independent Learners}
@@ -455,7 +474,7 @@
 	\end{exampleblock}
 \end{frame}
 %===============================================================================
-\begin{frame}{Decentralised Q-Learning}
+\begin{frame}{Decentralised Q-Learning\footnote{\fullcite{DBLP:conf/icml/Tan93}}}
 	\begin{exampleblock}{Idea}
 		\emph{Each agent is a Q-Learner and does consider other agents as a part of the environment}
 	\end{exampleblock}
@@ -484,7 +503,7 @@
 	\begin{exampleblock}{Implementation}
 		\begin{itemize}
 			\item Use two learning factor, $\alpha$ and $\beta$, with $\alpha > \beta$
-			\item The Q update is evaluated to consider the goodness of an action/space pair: $\delta(s, a) = r_t + \gamma * argmax_{a'}Q(s_t, a') - Q(s_t, a_t)$
+			\item The Q update is evaluated to consider the goodness of an action/space pair: $\delta(s, a) = r_t + \gamma * argmax_{a'}Q(s', a') - Q(s_t, a_t)$
 			\item When $\delta > 0$ it means that we improve our experience, so we use $\alpha$ as learning rate, $\beta$ otherwise
 			\item The Q update became: $ Q(s_t, a_t) =
 			\begin{cases}
@@ -496,8 +515,8 @@
 \end{frame}
 
 \begin{frame}{Hysteretic Q-Learning}
-	\begin{exampleblock}{}
-		\begin{itemize}
+	\begin{exampleblock}{Idea}
+		\begin{itemize}{}
 			\item[{\color{teal} \faThumbsUp}] It improve standard Q-Learning performance without adding more complexity
 			\item[{\color{teal} \faThumbsUp}] It is currently used in Deep Reinforcement Learning to handle complex System
 			\item[{\color{red} \faThumbsDown}] It is an heurestic, so it does not have any theoretical guarantes
@@ -506,30 +525,85 @@
 	\end{exampleblock}
 \end{frame}
 %===============================================================================
+\begin{frame}{QD-Learning\footnote[frame]{\fullcite{DBLP:journals/tsp/KarMP13}}}
+	\begin{exampleblock}{Idea}
+		\begin{itemize}
+			\item Each agent know it local actions and can communicate only with a restricted neighbourhood
+			\item The Q update depends on the Q values of the neighbours
+			\item To do that, the system mantain the Q table of different time step.
+			\item Q are indexed with: $Q^i_t$ (in english: the Q table of the agent $i$ at the time step $t$)
+			\item It uses \emph{innovation} and \emph{consensus}
+			
+		\end{itemize}		
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}{QD-Learning}
+	\begin{exampleblock}{Update rule}
+		\begin{itemize}
+			\item $consensus(s_t, a_t) = \sum_{i \in \mathcal{N}} (Q^{me}_t(s_t, a_t) - Q^i_t(s_t, a_t))$
+			\item $innovation(s_t, a_t) = (r_t + \gamma*argmax_{a'}Q^{me}_t(s', a') - Q^me_t(s_t, a_t))$
+			\item $innovation$ is the standard Q advantage evaluation
+			\item Finally, each agent update their table as: $Q^{me}_{t + 1}(s_t, a_t) = Q^{me}_t - \beta * consensus(s_t, a_t) + \alpha * innovation(s_t, a_t)$
+		\end{itemize}		
+	\end{exampleblock}
+	\begin{alertblock}{Discussion}
+		\begin{itemize}
+			\item[{\color{teal} \faThumbsUp}] It is shown that it converge asymptotically to an optimal policy \dots
+			\item[{\color{red} \faThumbsDown}]\dots under constraints of networks connection
+			\item[{\color{red} \faThumbsDown}]\dots with full state observability
+			\item[{\color{red} \faThumbsDown}]\dots with specific constraints on $\alpha$ and $\beta$ 
+			\item[{\color{red} \faThumbsDown}]\dots with a predefined neighbourhood graph 
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
 \section{Joint Action Learners}
 
 \begin{frame}{Joint Action Learners}
 	\begin{alertblock}{From Independent to Joint actions}	
 		\begin{itemize}
 			\item Independent learners tend to make the environment highly non-stationarity
-			\item Ideally, we can reduce it by create policy that observe other agents actions (tipycally denoted by: $\pi_{i,-i}$))
+			\item Futhermore, they do not consider other agents $\leftarrow$ collective behaviour through emergence (at exception of QD-learning)
+			\item Ideally, we can reduce non-stationarity and we want to consider other agents by creating policy that observe other agents actions (tipycally denoted by: $\pi_{i,\mathcal{N}}$))
 			\item This does not scale with the agent population.
 			\item A possibility to reduce the space is to consider only the neighbours (in a tipycally CAS settings)
 		\end{itemize}
 	\end{alertblock}
 \end{frame}
-\begin{frame}{QD-Learning}
 
-\end{frame}
+\begin{frame}{Neighbourhood Q-Learning\footnote{\fullcite{zai2020deep}}}
+	\begin{exampleblock}{}
+		\begin{itemize}
+			\item Q-Learning mixed with Joint-action spaces
+			\item Each agent improve a Q-function consider also the action taken by the neighbourhood ($a_{\mathcal{N}}$)
+			\item A way to handle that, it to consider the state as $k_t = (s, a_{\mathcal{N}})$
+			\item $Q(k_t, a) = Q(s, a_{-1}) + \alpha * (r_t + \gamma * argmax_{a'}Q(k', a'))$
+		\end{itemize}
+	\end{exampleblock}
 
-\begin{frame}{Neighbours Q-Learning}
-
+	\begin{exampleblock}{Implications}
+		\begin{itemize}
+			\item[{\color{teal}\faThumbsUp}] Consider neighbourhood actions $\implies$  reduce non-stationarity problem 
+			\item[{\color{red}\faThumbsDown}] Q depends on agent neighbourhood $\implies$ the Q table size increase \emph{exponentially} with the neighbourhood
+		\end{itemize}
+	\end{exampleblock}
 \end{frame}
 %===============================================================================
-
-
+\begin{frame}{"Just" a scartch to the surface :)}
+	\begin{exampleblock}{A recap}
+		\begin{itemize}
+			\item The approaches handle only partially the collective learning problem (scalability, cooperative, non-stationarity)
+			\item They are used nowadays but in combination with other approaches (neural networks, reply buffer, differential reward) \dots
+			\item \dots But today no a theretical solution exists yet for large scale collective learning
+			\item Note: we do not conver the "game theoretical" background, current main interest in literature (\emph{problem} consider few agents)
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
 %===============================================================================
 \section{Advanced Topics}
+\begin{frame}{State of the art: on advanced topics}
+	
+\end{frame}
 \begin{frame}{Centralised Learning and Distributed Control: Overview}
 
 \end{frame}
@@ -549,7 +623,7 @@
 
 \end{frame}
 
-\begin{frame}{Handling multi agent credit assigment problem}
+\begin{frame}{Handling Multi-Agent credit assignment problem}
 
 \end{frame}
 
