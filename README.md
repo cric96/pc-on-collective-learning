@@ -1,10 +1,5 @@
-# Beamer-AMSBolognaFC
-> A simple Beamer-LaTeX style for presentations by Alma Mater Studiorum (Cesena Campus)
-> with Bologna FC standard colours
+# On collective Learning
+A brief presentation on the topic of Multi Agent Reinforcement Learning, with a particular focus on the so-called Collective Systems (where agents have the same capabilities and the same policy).
 
-## Authors
-* Andrea Omicini
 
 ## How to use
-* Clone this repo by `git clone --recursive <repo url>`
-* Commits and push on the `master` or `main` branches will automatically produce versioned releases
