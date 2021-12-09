@@ -17,7 +17,7 @@
 \usepackage{fancyvrb}
 \usepackage[iso]{datetime}
 \renewcommand{\dateseparator}{}
-\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \newcommand{\version}{1}
 \usepackage[
 	backend=biber,
@@ -517,7 +517,7 @@
 	\begin{exampleblock}{Idea}
 		\begin{itemize}{}
 			\item[{\color{teal} \faThumbsUp}] It improves standard Q-Learning performance without adding more complexity
-			\item[{\color{teal} \faThumbsUp}] It is currently used in Deep Reinforcement Learning to handle complex System
+			\item[{\color{teal} \faThumbsUp}] It is currently used in Deep Reinforcement Learning to handle complex systems~\cite{DBLP:conf/icml/OmidshafieiPAHV17}
 			\item[{\color{red} \faThumbsDown}] It is a heuristic, so it does not have any theoretical guarantees
 			\item Other extensions follow this idea and suffer from the same pros and cons. The most famous are Distributed Q-Learning, Lenient Q-Learning, Win-Or-Learn-fast
 		\end{itemize}
@@ -690,7 +690,7 @@
 			\item Agent size was not a central problem in the first MARL works
 			\item Independent learners are typically deployed when we have to deal with several agents \dots
 			\item \dots but it makes the learning process noising
-			\item Lately, a novel trend emerges to handle this problem, the so-called Mean-Field Reinforcement Learning
+			\item Lately, a novel trend emerges to handle this problem, the so-called Mean-Field Reinforcement Learning\footnote[frame]{\fullcite{DBLP:conf/icml/YangLLZZW18}}
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
@@ -716,7 +716,7 @@
 			\item This is known as Multi-Agent credit assignment problem
 			\item It is tackled in COIN approach (i.e. differential reward) \dots
 			\item \dots but it required to run several simulations to understand each agent influence
-			\item COMA is a novel approach that uses an Actor-Critic setting with a contrafacutal baseline 
+			\item COMA\footnote[frame]{\fullcite{DBLP:conf/aaai/FoersterFANW18}} is a novel approach that uses an Actor-Critic setting with a contrafacutal baseline 
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
