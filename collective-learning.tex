@@ -21,7 +21,12 @@
 \newcommand{\version}{1}
 \usepackage[
 	backend=biber,
-	style=numeric]{biblatex}
+	citestyle=authoryear-icomp,
+	maxcitenames=1,
+	bibstyle=alphabetic]{biblatex}
+
+	\makeatletter
+
 \addbibresource{biblio.bib}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[On Collective Reinforcement Learning]
@@ -458,7 +463,7 @@
 			\item This led to the global optimal policies as an emergent behaviour
 			\item The homogeneity is driven by the same reward function and the same action/observation spaces
 			\item More agent $\implies$ more exploration
-			\item Not converge to global optimum, but good pratical performance are founded in various works: \cite{DBLP:conf/atal/TumerA07, DBLP:conf/atal/TumerAW02, DBLP:conf/iros/WangS06}
+			\item Not converge to global optimum, but good pratical performance are founded in various works: \parencite{DBLP:conf/atal/TumerA07, DBLP:conf/atal/TumerAW02, DBLP:conf/iros/WangS06}
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
@@ -517,9 +522,9 @@
 	\begin{exampleblock}{Idea}
 		\begin{itemize}{}
 			\item[{\color{teal} \faThumbsUp}] It improves standard Q-Learning performance without adding more complexity
-			\item[{\color{teal} \faThumbsUp}] It is currently used in Deep Reinforcement Learning to handle complex systems~\cite{DBLP:conf/icml/OmidshafieiPAHV17}
+			\item[{\color{teal} \faThumbsUp}] It is currently used in Deep Reinforcement Learning to handle complex systems~\parencite{DBLP:conf/icml/OmidshafieiPAHV17}
 			\item[{\color{red} \faThumbsDown}] It is a heuristic, so it does not have any theoretical guarantees
-			\item Other extensions follow this idea and suffer from the same pros and cons. The most famous are Distributed Q-Learning~\cite{DBLP:conf/icml/LauerR00}, Lenient Q-Learning~\cite{DBLP:conf/atal/PanaitSL06}, Win-Or-Learn Fast~\cite{DBLP:journals/ai/BowlingV02}
+			\item Other extensions follow this idea and suffer from the same pros and cons. The most famous are Distributed Q-Learning~\parencite{DBLP:conf/icml/LauerR00}, Lenient Q-Learning~\parencite{DBLP:conf/atal/PanaitSL06}, Win-Or-Learn Fast~\parencite{DBLP:journals/ai/BowlingV02}
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
