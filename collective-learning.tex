@@ -15,7 +15,7 @@
 \usepackage{centernot}
 \usepackage{fontawesome}
 \usepackage{fancyvrb}
-\usepackage[iso]{datetime}
+\usepackage[ddmmyyyy]{datetime}
 \renewcommand{\dateseparator}{}
 %\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \newcommand{\version}{1}
@@ -36,7 +36,7 @@
 {Techniques, Challenges, and Opportunities}
 %
 \author[\sspeaker{Aguzzi}]
-{\speaker{Gianluca Aguzzi} \and Mirko Viroli\\\href{mailto:gianluca.aguzzi@unibo.it}{gianluca.aguzzi@unibo.it} \and \href{mirko.viroli@unibo.it}{mirko.viroli@unibo.it}}
+{\speaker{Gianluca Aguzzi} \href{mailto:gianluca.aguzzi@unibo.it}{gianluca.aguzzi@unibo.it}}
 %
 \institute[DISI, Univ.\ Bologna]
 {Dipartimento di Informatica -- Scienza e Ingegneria (DISI)\\\textsc{Alma Mater Studiorum} -- Universit{\`a} di Bologna}
@@ -246,12 +246,12 @@
 	\begin{exampleblock}{Homogeneous}
 		\begin{itemize}
 			\item Each agent has same capabilities ($A^1 = \dots = A^N$)
-			\item The overall goal is to find the best policy that is the same for each agent ($\pi^* = {\pi^{*}}_1 \dots {\pi^{*}}_N$)
+			\item The overall goal is to find the best policy that is the same for each agent ($\pi^* = {\pi^{*}}_1 = \pi^{*}_2 = \dots = {\pi^{*}}_N$)
 		\end{itemize}
 	\end{exampleblock}
 	\begin{exampleblock}{Heterogeneous}
 		\begin{itemize}
-			\item Each agent could has different capabilities (in the worst case, $A^1 \neq \dots \neq A^N$)
+			\item Each agent could have different capabilities (in the worst case, $A^1 \neq \dots \neq A^N$)
 			\item Each agent has its local policy that should be maximised following the global collective goal
 		\end{itemize}
 	\end{exampleblock}
@@ -295,7 +295,7 @@
 			\item An offline-learning online execution pattern
 			\item \emph{Simulation time}
 			\begin{itemize}
-				\item Each node follow the typical $o_t, a_t, o_{t+1}, a_{t+1},\dots $ trajectory using a local policy
+				\item Each node follows the typical $o_t, a_t, o_{t+1}, a_{t+1},\dots $ trajectory using a local policy
 				\item After an episode, this trajectory (or something derived from it) will be sent to a central learner
 				\item It, using a global view of the system, improves the policies of the agents 
 				\item At the end of the training phase, the policy will be shared with the agents
@@ -305,7 +305,7 @@
 					\item Each agent has the local policy distilled during the simulation time
 					\item With it, they act in the environment
 				\end{itemize}
-			\item A simplistic description, more elaborate techniques exists (i.e. agents share the gradient to the central leaner)
+			\item A simplistic description, more elaborate techniques exists (i.e. agents share Q-table to the central leaner)
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
@@ -496,7 +496,7 @@
 	\begin{alertblock}{Idea}
 		\begin{itemize}
 			\item Decentralised Q-Learning does not take into consideration non-stationarity problem
-			\item An idea could be to apply a \emph{correction} factor that reduces the non-stationarity born for the concurrent learning
+			\item An idea could be to apply a \emph{correction} factor that reduces the non-stationarity during the concurrent learning phases
 			\item Hysteretic Q-Learning uses a \emph{hysteresis} heuristic to handle this problem
 			\item It supposes an optimistic behaviour, giving more weight to good action then the bad actions (\emph{due to the exploration of nearby agents})
 		\end{itemize}
@@ -580,7 +580,7 @@
 		\begin{itemize}
 			\item Q-Learning mixed with Joint action spaces
 			\item Each agent improve a Q-function consider also the action taken by the neighbourhood ($a_{\mathcal{N}}$)
-			\item A way to handle that, it to consider the state as $k_t = (s, a_{\mathcal{N}})$
+			\item A way to handle that, is to consider the state as $k_t = (s, a_{\mathcal{N}})$
 			\item $Q(k_t, a) = Q(s, a_{-1}) + \alpha * (r_t + \gamma * argmax_{a'}Q(k', a'))$
 		\end{itemize}
 	\end{exampleblock}
@@ -597,7 +597,7 @@
 	\begin{exampleblock}{A recap}
 		\begin{itemize}
 			\item The approaches handle only partially the collective learning problem (scalability, cooperative, non-stationarity)
-			\item They are used nowadays but in combination with other approaches (neural networks, reply buffer, differential reward) \dots
+			\item They are used nowadays but in combination with other approaches (neural networks, reply buffer, difference reward) \dots
 			\item \dots But today no theoretical solutions exists yet for large scale collective learning
 			\item Note: we do not cover the "game theoretical" background $\leftarrow$ it is current the main interest in literature (\emph{problem} $\implies$ these works consider few agents)
 		\end{itemize}
@@ -719,7 +719,7 @@
 			\item In CAS settings, typically we have a global reward function
 			\item[{\color{red} \faThumbsDown}] It is hard to understand the influence of the agent action on that signal
 			\item This is known as Multi-Agent credit assignment problem
-			\item It is tackled in COIN approach (i.e. differential reward) \dots
+			\item It is tackled in COIN approach~\parencite{wolpert1999introduction} \dots
 			\item \dots but it required to run several simulations to understand each agent influence
 			\item COMA\footnote[frame]{\fullcite{DBLP:conf/aaai/FoersterFANW18}} is a novel approach that uses an Actor-Critic setting with a contrafacutal baseline 
 		\end{itemize}
@@ -732,7 +732,7 @@
 			\item Works on Multi-Agent Reinforcement Learning consider Stochastic games as the model of the environment
 			\item There, agents action synchronously, i.e. at the time step t+1 all agents have done their action
 			\item This is impossible to assume in CAS
-			\item Any ideas? Lamport logical clock?
+			\item Any ideas? Lamport logical clock? 
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
