@@ -169,14 +169,16 @@
 		\end{itemize}
 	\end{exampleblock}
 	\begin{columns}
-		\begin{column}{0.5\textwidth}		
+		\begin{column}{0.4\textwidth}
+			\raggedleft
 			\begin{figure}
-				\includegraphics[height=2.5cm]{example-image-a}
+				\includegraphics[height=2.5cm]{img/single-agent-multi-agent-1.pdf}
 			\end{figure}
 		\end{column}
-		\begin{column}{0.5\textwidth}	
+		\begin{column}{0.4\textwidth}	
+			\raggedright
 			\begin{figure}
-				\includegraphics[height=2.5cm]{example-image-a}
+				\includegraphics[height=2.5cm]{img/single-agent-multi-agent-2.pdf}
 			\end{figure}
 		\end{column}
 	\end{columns}
@@ -309,10 +311,49 @@
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
+
+\begin{frame}{MARL Systems: Successfull Application}
+	\centering
+	\begin{exampleblock}{OpenAI Hide And Seek: \url{https://openai.com/blog/emergent-tool-use/}}
+		\begin{figure}
+			\href{https://www.youtube.com/watch?v=kopoLzvh5jY}{\includegraphics{img/hide-and-seek.jpeg}}
+		\end{figure}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}{MARL Systems: Successfull Application}
+	
+	\begin{exampleblock}{Capture The Flag: \url{https://deepmind.com/blog/article/capture-the-flag-science}}
+	\begin{figure}
+		\centering
+		\href{https://www.youtube.com/watch?v=dltN4MxV1RI}{\includegraphics[width=0.85\textwidth]{img/capture-the-flag.png}}
+	\end{figure}	
+	\end{exampleblock}
+\end{frame}
 %===============================================================================
 \section{Learning in CAS}
+
+\begin{frame}{Collective Adaptive System (CAS)}
+	\begin{alertblock}{Recap}
+		Systems composed by a (possibly) large set of components executing a \emph{collective} task relying on component interactions and showing \emph{inherent} adaptiveness. 
+	\end{alertblock}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}		
+			\begin{figure}
+				\includegraphics[height=3cm]{img/cas-1}
+			\end{figure}
+		\end{column}
+	
+
+		\begin{column}{0.5\textwidth}	
+			\begin{figure}
+				\includegraphics[height=3cm]{img/cas-3}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
 %===============================================================================
-\begin{frame}[c]{Learning in Collective Adaptive System~\footnote[frame]{\fullcite{DBLP:conf/icse/DAngeloGGGNPT19}}}
+\begin{frame}[c]{Learning in CAS~\footnote[frame]{\fullcite{DBLP:conf/icse/DAngeloGGGNPT19}}}
 \begin{exampleblock}{Constraints}
 	\begin{itemize}
 		\item The collective goal could be accomplished through competition and/or cooperation 
@@ -350,6 +391,14 @@
 	\end{exampleblock}
 \end{frame}
 
+\begin{frame}{Learning in CAS: A Motivating Example}
+	\begin{exampleblock}{Robot Collision Avoidance~\footnote[frame]{\fullcite{DBLP:conf/icra/LongFLLZP18}} \url{https://sites.google.com/view/drlmaca}}
+		\centering
+		\begin{figure}
+			\href{https://www.youtube.com/watch?v=Uj1yAmlL5lk}{\includegraphics[width=0.7\textwidth]{img/collective-learning.png}}
+		\end{figure}
+	\end{exampleblock}
+\end{frame}
 \begin{frame}{On sample efficiency: Example of learning time }
 	\begin{exampleblock}{A Nowadays problem \dots}
 		\begin{itemize}
@@ -428,6 +477,7 @@
 		\begin{itemize}
 			\item Each agent is seen as a tuple $(M, \mathcal{N})$
 			\item $M$ is a local Markov decision process ($S$ is an observation space in common with the entire system)
+			\item $\mathcal{N}$ is the neighbourhood perceived by the agent
 			\item The global state system state is unknown
 			\item Agents want to learn a policy $\pi(a | s, \mathcal{N})$ to share with the entire system
 			\item When agents do not consider neighbours, we call the system as \emph{Independent learners}
@@ -568,7 +618,7 @@
 		\begin{itemize}
 			\item Independent learners tend to make the environment highly non-stationarity
 			\item Furthermore, they do not consider other agents $\leftarrow$ collective behaviour through emergence (QD-learning is an exception)
-			\item Ideally, we can reduce non-stationarity and we want to consider other agents by creating policies that observe other agents actions (typically denoted by: $\pi_{i,\mathcal{N}}$))
+			\item Ideally, we can reduce non-stationarity and we want to consider other agents by creating policies that observe other agents actions (typically denoted by: $\pi_{i,\mathcal{N}}$)
 			\item This does not scale with the agent population.
 			\item A possibility to reduce the space is to consider only the neighbours (in a typically CAS settings)
 		\end{itemize}
@@ -648,16 +698,23 @@
 \end{frame}
 
 \begin{frame}{On Actor-Critic: Learning description}
-	\begin{alertblock}{Idea}
-		\begin{itemize}
-			\item Combine Policy Gradient and Value-Based Methods
-			\item The Critic (the value function) is updated like standard value approaches (e.g. TD errors)
-			\item The Actor (the policy) is updated using the policy gradient update based on the Critic estimation
-		\end{itemize}
-	\end{alertblock}
-	\begin{figure}
-		\includegraphics[height=3cm]{example-image-b}
-	\end{figure}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}		
+			\begin{alertblock}{Idea}
+				\begin{itemize}
+					\item Combine Policy Gradient and Value-Based Methods
+					\item The Critic (the value function) is updated like standard value approaches (e.g. TD errors)
+					\item The Actor (the policy) is updated using the policy gradient update based on the Critic estimation
+				\end{itemize}
+			\end{alertblock}
+		\end{column}
+		\begin{column}{0.5\textwidth}			
+			\raggedleft
+				\begin{figure}
+					\includegraphics[height=4cm]{img/actor-critic.png}
+				\end{figure}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}{On Actor-Critic: MARL settings}
