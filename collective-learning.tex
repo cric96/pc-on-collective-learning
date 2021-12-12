@@ -111,28 +111,25 @@
 	\begin{alertblock}{Definition}
 		An agent do not have a \emph{perfect} and \emph{complete} knowledge of the state of the environment
 	\end{alertblock}
-	\begin{exampleblock}{They are quite typical in (non-)complex systems}
-		\begin{itemize}
-			\item Card-games (poker, black-jack, \dots) --- Why?
-			\item A driving card
-			\item Swarm of drones
-		\end{itemize}
-	\end{exampleblock}
+
+	\begin{figure}
+		\includegraphics[height=5cm]{img/challenge-partial-observable.pdf}
+	\end{figure}
 \end{frame}
 
-\begin{frame}{Partial Observable Environments}
-	\begin{exampleblock}{Partial Observable MDP $\mathcal{P}$ (POMDP) \href{https://www.pomdp.org/}{\faLink}}
-		\begin{itemize}
-			\item An agent cannot directly observe the system state, but he can make \emph{observations} that depend on this state
-			\item POMDP is a tuple $(S, A, T, R, \Omega, O)$
-			\item $S, A, T, R$ are the same variable described in MDP
-			\item $\Omega$ is the set of observations perceived by the agent $\{o_1, \dots, o_n\}$
-			\item $O$ is the set of conditional probability $O(o | s, a)$
-			\item I want to learn a policy that depends on $o$ but that maximises a reward function that depends on $s$
-			\item The agents need to build a belief state from the history of the observations
-		\end{itemize}
-	\end{exampleblock}
-\end{frame}
+%\begin{frame}{Partial Observable Environments}
+%	\begin{exampleblock}{Partial Observable MDP $\mathcal{P}$ (POMDP) \href{https://www.pomdp.org/}{\faLink}}
+%		\begin{itemize}
+%			\item An agent cannot directly observe the system state, but he can make \emph{observations} that depend on this state
+%			\item POMDP is a tuple $(S, A, T, R, \Omega, O)$
+%			\item $S, A, T, R$ are the same variable described in MDP
+%			\item $\Omega$ is the set of observations perceived by the agent $\{o_1, \dots, o_n\}$
+%			\item $O$ is the set of conditional probability $O(o | s, a)$
+%			\item I want to learn a policy that depends on $o$ but that maximises a reward function that depends on $s$
+%			\item The agents need to build a belief state from the history of the observations
+%		\end{itemize}
+%	\end{exampleblock}
+%\end{frame}
 %/////////
 \begin{frame}[c]{Non-stationary environments}
 %/////////
@@ -532,7 +529,7 @@
 			\item Then, the central learner is not required anymore
 		\end{itemize}
 	\end{exampleblock}
-	\begin{exampleblock}{\emph{Indeed} yes \dots \href{}{}}
+	\begin{exampleblock}{\emph{Indeed} yes \dots}
 		\begin{itemize}
 			\item \dots But this allows only offline learning (CTDE setting)
 			\item This practically lead to lazy agent -- the exploration part is limited 
@@ -693,7 +690,7 @@
 \begin{frame}{State of the art: on advanced topics}
 	\begin{exampleblock}{Deep Learning as a mechanism to solve complex tasks}
 		\begin{itemize}
-			\item Nowadays, Deep Learning architectures are typically used in MARL
+			\item Nowadays, Deep Learning architectures are typically used in MARL --- example in MAgent (\href{https://figshare.com/articles/media/Collective_Learning_-_no_training/17168900}{random}) (\href{https://figshare.com/articles/media/Collective_Learning_-_DQNN/17168912}{deep learning policy})
 			\item For handling non-stationarity, \emph{actor-critic} methodologies are used
 			\item For handling partial-observability, \emph{recurrent} networks are applied
 			\item For handling large-state/action space, \emph{deep architectures} are considered
@@ -818,16 +815,16 @@
 	\end{exampleblock}
 \end{frame}
 
-\begin{frame}{Not explored issue: Global clock}
-	\begin{exampleblock}{}
-		\begin{itemize}
-			\item Works on Multi-Agent Reinforcement Learning consider Stochastic games as the model of the environment
-			\item There, agents action synchronously, i.e. at the time step t+1 all agents have done their action
-			\item This is impossible to assume in CAS
-			\item Any ideas? Lamport logical clock? 
-		\end{itemize}
-	\end{exampleblock}
-\end{frame}
+%\begin{frame}{Not explored issue: Global clock}
+%	\begin{exampleblock}{}
+%		\begin{itemize}
+%			\item Works on Multi-Agent Reinforcement Learning consider Stochastic games as the model of the environment
+%			\item There, agents action synchronously, i.e. at the time step t+1 all agents have done their action
+%			\item This is impossible to assume in CAS
+%			\item Any ideas? Lamport logical clock? 
+%		\end{itemize}
+%	\end{exampleblock}
+%\end{frame}
 %===============================================================================
 
 %% Parla di come gestire l'osservabilità parziale
