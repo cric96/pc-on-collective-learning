@@ -484,7 +484,7 @@
 		\begin{itemize}
 			\item Each agent is seen as a tuple $(M, \mathcal{N})$
 			\item $M$ is a local Markov decision process ($S$ is an observation space in common with the entire system)
-			\item $\mathcal{N}$ is the neighbourhood perceived by the agent
+			\item $\mathcal{N}$ is the neighbourhood perceived by an agents
 			\item The global state system state is unknown
 			\item Agents want to learn a policy $\pi(a | s, \mathcal{N})$ to share with the entire system
 			\item When agents do not consider neighbours, we call the system as \emph{Independent learners}
@@ -638,7 +638,7 @@
 			\item Q-Learning mixed with Joint action spaces
 			\item Each agent improve a Q-function consider also the action taken by the neighbourhood ($a_{\mathcal{N}}$)
 			\item A way to handle that, is to consider the state as $k_t = (s, a_{\mathcal{N}})$
-			\item $Q(k_t, a) = Q(s, a_{-1}) + \alpha * (r_t + \gamma * argmax_{a'}Q(k', a'))$
+			\item $Q(k_t, a) = Q(k_t, a) + \alpha * (r_t + \gamma * argmax_{a'}Q(k', a'))$
 		\end{itemize}
 	\end{exampleblock}
 
@@ -650,7 +650,7 @@
 	\end{exampleblock}
 \end{frame}
 %===============================================================================
-\begin{frame}{"Just" a scratch to the surface :)}
+\begin{frame}{Just a scratch to the surface :)}
 	\begin{exampleblock}{A recap}
 		\begin{itemize}
 			\item The approaches handle only partially the collective learning problem (scalability, cooperative, non-stationarity)
