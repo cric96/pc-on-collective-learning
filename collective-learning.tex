@@ -261,7 +261,7 @@
 
 %/////////
 \begin{frame}{MARL Systems: Learning Scheme}
-	\begin{exampleblock}{Centralised Learning and Centralised Execution}
+	\begin{exampleblock}{Centralised Training and Centralised Execution (CTCE)}
 		\begin{itemize}
 			\item \emph{One} agent with a global view of the system (in the cloud? in a server?)
 			\item Nodes send their perception to that central agent
@@ -278,8 +278,18 @@
 
 %/////////
 \begin{frame}{MARL Systems: Learning Scheme}
+	\begin{exampleblock}{Centralised Training and Centralised Execution (CTCE)}
+		\begin{figure}
+			\includegraphics[height=6cm]{img/learning-scheme-clce.pdf}
+		\end{figure}
+	\end{exampleblock}
+\end{frame}
+%/////////
+
+%/////////
+\begin{frame}{MARL Systems: Learning Scheme}
 	
-	\begin{exampleblock}{Decentralised Learning and Distributed Execution}
+	\begin{exampleblock}{Decentralised Training and Distributed Execution (DTDE)}
 		\begin{itemize}
 			\item Each node has its local policy/value table
 			\item They can perceive the environment state (or they can observe a part of it)
@@ -290,9 +300,20 @@
 	\end{exampleblock}
 \end{frame}
 %/////////
+
+
+%/////////
+\begin{frame}{MARL Systems: Learning Scheme}
+	\begin{exampleblock}{Decentralised Training and Distributed Execution (DTDE)}
+		\begin{figure}
+			\includegraphics[height=6cm]{img/learning-scheme-dtde.pdf}
+		\end{figure}
+	\end{exampleblock}
+\end{frame}
+
 \begin{frame}{MARL Systems: Learning Scheme}
 	
-	\begin{exampleblock}{Centralised Learning and Distributed Execution}
+	\begin{exampleblock}{Centralised Training and Distributed Execution (CTDE)}
 		\begin{itemize}
 			\item An offline-learning online execution pattern
 			\item \emph{Simulation time}
@@ -307,12 +328,20 @@
 					\item Each agent has the local policy distilled during the simulation time
 					\item With it, they act in the environment
 				\end{itemize}
-			\item A simplistic description, more elaborate techniques exists (i.e. agents share Q-table to the central leaner)
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
 
-\begin{frame}{MARL Systems: Successfull Application}
+
+\begin{frame}{MARL Systems: Learning Scheme}
+	\begin{exampleblock}{Decentralised Training and Distributed Execution (DTDE)}
+		\begin{figure}
+			\includegraphics[height=6cm]{img/learning-scheme-ctde.pdf}
+		\end{figure}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}{MARL Systems: Successful Applications}
 	\centering
 	\begin{exampleblock}{OpenAI Hide And Seek: \url{https://openai.com/blog/emergent-tool-use/}}
 		\begin{figure}
@@ -321,7 +350,7 @@
 	\end{exampleblock}
 \end{frame}
 
-\begin{frame}{MARL Systems: Successfull Application}
+\begin{frame}{MARL Systems: Successful Applications}
 	
 	\begin{exampleblock}{Capture The Flag: \url{https://deepmind.com/blog/article/capture-the-flag-science}}
 	\begin{figure}
@@ -391,21 +420,6 @@
 	\end{exampleblock}
 \end{frame}
 
-\begin{frame}{Learning in CAS: A Motivating Example}
-	\begin{exampleblock}{Robot Collision Avoidance~\footnote[frame]{\fullcite{DBLP:conf/icra/LongFLLZP18}} \url{https://sites.google.com/view/drlmaca}}
-		\centering
-		\begin{figure}
-			\href{https://www.youtube.com/watch?v=Uj1yAmlL5lk}{\includegraphics[width=0.7\textwidth]{img/collective-learning.png}}
-		\end{figure}
-	\end{exampleblock}
-\end{frame}
-\begin{frame}{Learning in CAS: Toolkits}
-	\begin{exampleblock}{MAgent~\footnote[frame]{zheng2018magent} \url{https://github.com/geek-ai/MAgent}}
-		\begin{figure}
-			\href{https://www.youtube.com/watch?v=HCSm0kVolqI}{\includegraphics[width=0.7\textwidth]{img/magent.png}}
-		\end{figure}
-	\end{exampleblock}
-\end{frame}
 \begin{frame}{On sample efficiency: Example of learning time }
 	\begin{exampleblock}{A Nowadays problem \dots}
 		\begin{itemize}
@@ -424,6 +438,21 @@
 			\item But the system-wide action space is the cartesian product of the agent action-space, so the A cardinality is $|A|^N$
 			\item With 100 agents with 10 possible action, we have already reached an action space with more action then the particle in the universe ($\sim 10^{80}$ \href{https://en.wikipedia.org/wiki/Eddington_number}{\faLink}).
 		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+\begin{frame}{Learning in CAS: A Motivating Example}
+	\begin{exampleblock}{Robot Collision Avoidance~\footnote[frame]{\fullcite{DBLP:conf/icra/LongFLLZP18}} \url{https://sites.google.com/view/drlmaca}}
+		\centering
+		\begin{figure}
+			\href{https://www.youtube.com/watch?v=Uj1yAmlL5lk}{\includegraphics[width=0.7\textwidth]{img/collective-learning.png}}
+		\end{figure}
+	\end{exampleblock}
+\end{frame}
+\begin{frame}{Learning in CAS: Toolkits}
+	\begin{exampleblock}{MAgent~\footnote[frame]{zheng2018magent} \url{https://github.com/geek-ai/MAgent}}
+		\begin{figure}
+			\href{https://www.youtube.com/watch?v=HCSm0kVolqI}{\includegraphics[width=0.7\textwidth]{img/magent.png}}
+		\end{figure}
 	\end{exampleblock}
 \end{frame}
 %/////////
@@ -495,7 +524,7 @@
 \end{frame}
 
 \begin{frame}{Learning in CAS: Can we use standard RL algorithms?}
-	\begin{exampleblock}{In a centralised learning decentralised execution settings}
+	\begin{exampleblock}{In a centralised training decentralised execution settings}
 		\begin{itemize}
 			\item Each agent explores the environment with the same policy $\phi$
 			\item Central learners improve the policy following the agents' perceptions
@@ -503,9 +532,9 @@
 			\item Then, the central learner is not required anymore
 		\end{itemize}
 	\end{exampleblock}
-	\begin{exampleblock}{\emph{Ideally} yes \dots}
+	\begin{exampleblock}{\emph{Indeed} yes \dots \href{}{}}
 		\begin{itemize}
-			\item \dots But this allows only offline learning
+			\item \dots But this allows only offline learning (CTDE setting)
 			\item This practically lead to lazy agent -- the exploration part is limited 
 			\item Does not consider other agent actions -- each agent act independently from each other
 		\end{itemize}
@@ -529,7 +558,7 @@
 		\begin{itemize}
 			\item [{\color{teal} \faThumbsUp}] \emph{Scalable}: the learning algorithm does not depend on the system size
 			\item [{\color{teal} \faThumbsUp}] \emph{Easy to implement}: the algorithm is the same developed for single agent context
-			\item [{\color{teal} \faThumbsUp}] \emph{Offline and Online}: Can be used both at simulation time or at deployment time
+			\item [{\color{teal} \faThumbsUp}] \emph{Offline and Online}: Can be used both at simulation time or at deployment time (CTDE, DTDE are conceptually supported)
 			\item [{\color{red} \faThumbsDown}] \emph{Increase non-stationarity}: the environment dynamics change continuously as the agent learns a new policy
 		\end{itemize}
 	\end{exampleblock}
@@ -594,7 +623,6 @@
 			\item To do that, the system mantains Q-tables of different time steps.
 			\item Q-tables are indexed with: $Q^i_t$ (in English: the Q-table of the agent $i$ at the time step $t$)
 			\item It uses \emph{innovation} and \emph{consensus}
-			
 		\end{itemize}		
 	\end{exampleblock}
 \end{frame}
