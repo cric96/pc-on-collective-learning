@@ -109,7 +109,7 @@
 \begin{frame}{Partial Observable environments}
 %/////////
 	\begin{alertblock}{Definition}
-		An agent do not have a \emph{perfect} and \emph{complete} knowledge of the state of the environment
+		An agent does not have a \emph{perfect} and \emph{complete} knowledge of the state of the environment
 	\end{alertblock}
 
 	\begin{figure}
@@ -209,7 +209,7 @@
 			\item $N = 2$
 			\item $A^1 = A^2 = $ \{Paper, Rock, Scissor\}
 			\item $S = $ \{ \}
-			\item $R^1 = R^2 = \begin{blockarray}{cccc}
+			\item $R = \begin{blockarray}{cccc}
         & Rock & Paper & Scissor \\
       \begin{block}{c[ccc]}
         Rock    & 0, 0  & -1, 1 & 1, -1 \\
@@ -228,19 +228,37 @@
 			\item Agents share the same reward function ($R^1 = \dots = R^N$) in order to accomplish a collective goal
 		\end{itemize}
 	\end{alertblock}
+	\begin{figure}
+		\includegraphics[height=5cm]{img/cooperative}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{MARL Systems: Task type}
 	\begin{exampleblock}{Competitive}
 		\begin{itemize}
 			\item Agents compete with each other to maximise a long term return
 			\item Board Games, Video games, \dots
 		\end{itemize}
 	\end{exampleblock}
+
+	\begin{figure}
+		\includegraphics[height=5cm]{img/competitive}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{MARL Systems: Task type}
 	\begin{exampleblock}{Mixed}
 		\begin{itemize}
 			\item Agents can both compete and cooperate in order to maximise a global reward function
 			\item Also called \textit{General Sum games}
 		\end{itemize}
 	\end{exampleblock}
+
+	\begin{figure}
+		\includegraphics[height=5cm]{img/mixed}
+	\end{figure}
 \end{frame}
+
 \begin{frame}{On Cooperative Task}
 	\begin{exampleblock}{Homogeneous}
 		\begin{itemize}
@@ -266,7 +284,7 @@
 			\item With the current policy, it chooses the actions that nodes should performance (\emph{Control})
 			\item In the next time step, it evaluates the reward function and updates the policy accordingly (\emph{Learn})
 			\item \emph{Are the nodes agents?}
-			\item Both used in offline and pure-online setting
+			\item Used mainly in offline (i.e. at simulation time) setting 
 		\end{itemize}
 	\end{exampleblock}
 
@@ -286,13 +304,13 @@
 %/////////
 \begin{frame}{MARL Systems: Learning Scheme}
 	
-	\begin{exampleblock}{Decentralised Training and Distributed Execution (DTDE)}
+	\begin{exampleblock}{Decentralised Training and Decentralised Execution (DTDE)}
 		\begin{itemize}
 			\item Each node has its local policy/value table
 			\item They can perceive the environment state (or they can observe a part of it)
 			\item With the current state, they perform an action following their local policy (\emph{Control})
-			\item In the next time step, they update their policy following a local reward function 
-			\item Both used in offline and pure-online setting
+			\item In the next time step, they update their policy following a local reward function (\emph{Learn})
+			\item Both used in offline and online (i.e. deployment time) setting
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
@@ -301,7 +319,7 @@
 
 %/////////
 \begin{frame}{MARL Systems: Learning Scheme}
-	\begin{exampleblock}{Decentralised Training and Distributed Execution (DTDE)}
+	\begin{exampleblock}{Decentralised Training and Decentralised Execution (DTDE)}
 		\begin{figure}
 			\includegraphics[height=6cm]{img/learning-scheme-dtde.pdf}
 		\end{figure}
@@ -310,15 +328,15 @@
 
 \begin{frame}{MARL Systems: Learning Scheme}
 	
-	\begin{exampleblock}{Centralised Training and Distributed Execution (CTDE)}
+	\begin{exampleblock}{Centralised Training and Decentralised Execution (CTDE)}
 		\begin{itemize}
-			\item An offline-learning online execution pattern
+			\item A simulation time learning online execution pattern
 			\item \emph{Simulation time}
 			\begin{itemize}
 				\item Each node follows the typical $o_t, a_t, o_{t+1}, a_{t+1},\dots $ trajectory using a local policy
 				\item After an episode, this trajectory (or something derived from it) will be sent to a central learner
 				\item It, using a global view of the system, improves the policies of the agents 
-				\item At the end of the training phase, the policy will be shared with the agents
+				\item An then the policies will be shared with the agents
 			\end{itemize} 
 			\item \emph{Execution time}
 				\begin{itemize}
@@ -331,7 +349,7 @@
 
 
 \begin{frame}{MARL Systems: Learning Scheme}
-	\begin{exampleblock}{Decentralised Training and Distributed Execution (DTDE)}
+	\begin{exampleblock}{Decentralised Training and Decentralised Execution (DTDE)}
 		\begin{figure}
 			\includegraphics[height=6cm]{img/learning-scheme-ctde.pdf}
 		\end{figure}
@@ -397,7 +415,7 @@
 	\begin{alertblock}{Learning in CASs make the environments non-stationary}
 		Each agent learns concurrently $\implies$ by the eye of an agent the environment is in continuous evolution.
 	\end{alertblock}
-	\begin{alertblock}{The course of dimensionality -- MAS combinatorial nature}
+	\begin{alertblock}{The curse of dimensionality -- MAS combinatorial nature}
 		When we have to deal with a large number of agents, the overall state-action space is increasing exponentially to the number of agents --- so a central learner cannot solve the learning problem.
 	\end{alertblock}
 \end{frame}
@@ -406,10 +424,6 @@
 	\begin{exampleblock}{Multi-Agent credit assignment problem}
 		Typically, in CAS, a global reward function exists. But it is hard to understand the influence of a single agent to
 		the overall collective behaviour.
-	\end{exampleblock}
-	\begin{exampleblock}{A lack of a global clock}
-		CASs are distributed systems $\implies$ a global synchronization clock does not exist, making the standard
-		Stachocastic game model quite inadequate.
 	\end{exampleblock}
 	\begin{exampleblock}{Sample efficiency}
 		Action-space and state-space are very large in CASs $\implies$ the problem of sample efficiency (i.e. how many samples does the RL need to reach a good policy?)
@@ -433,7 +447,7 @@
 			\item A central agent (i.e. in the cloud? In a server?) sees the entire system
 			\item Standard RL algorithm (tabular) create a table with the size of $|S \times A|$
 			\item But the system-wide action space is the cartesian product of the agent action-space, so the A cardinality is $|A|^N$
-			\item With 100 agents with 10 possible action, we have already reached an action space with more action then the particle in the universe ($\sim 10^{80}$ \href{https://en.wikipedia.org/wiki/Eddington_number}{\faLink}).
+			\item With 100 agents with 10 possible actions, we have already reached an action space with more actions then the particles in the universe ($\sim 10^{80}$ \href{https://en.wikipedia.org/wiki/Eddington_number}{\faLink}).
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
@@ -446,7 +460,7 @@
 	\end{exampleblock}
 \end{frame}
 \begin{frame}{Learning in CAS: Toolkits}
-	\begin{exampleblock}{MAgent~\footnote[frame]{zheng2018magent} \url{https://github.com/geek-ai/MAgent}}
+	\begin{exampleblock}{MAgent~\footnote[frame]{\fullcite{zheng2018magent}} \url{https://github.com/geek-ai/MAgent}}
 		\begin{figure}
 			\href{https://www.youtube.com/watch?v=HCSm0kVolqI}{\includegraphics[width=0.7\textwidth]{img/magent.png}}
 		\end{figure}
@@ -471,7 +485,7 @@
 	\end{exampleblock}
 \end{frame}
 
-\begin{frame}{Learning in CAS: Models}
+%\begin{frame}{Learning in CAS: Models}
 		
 	%\begin{exampleblock}{Dec-POMDP $\mathcal{D}$ \href{http://rbr.cs.umass.edu/camato/decpomdp/overview.html}{\faLink}}
 	%	\begin{itemize}
@@ -489,21 +503,21 @@
 	%		\item The homogeneity is not captured by the model (different action, observation, and reward spaces)
 	%	\end{itemize}
 	%\end{exampleblock}
-	\begin{exampleblock}{Dec-POMDP \href{http://rbr.cs.umass.edu/camato/decpomdp/overview.html}{\faLink}}
-		\begin{itemize}
-			\item Extension of POMDP to Multi-Agent settings
-			\item N agent act in a Markovian environment \emph{but} they perceive only partial information about it (observations)
-			\item[\faExclamationTriangle] Does not consider homogeneity
-		\end{itemize}
-	\end{exampleblock}
-	\begin{exampleblock}{SwarMDP~\footnote[frame]{\fullcite{DBLP:journals/corr/SosicKZK16}}}
-		\begin{itemize}
-			\item Consider a homogeneous population of agents (i.e. same action, observation space and same policy)
-			\item Learning lead to a single policy that map observation (not history) to action
-			\item[\faExclamationTriangle] Time continuing to be synchronous
-		\end{itemize}
-	\end{exampleblock}
-\end{frame}
+	%\begin{exampleblock}{Dec-POMDP \href{http://rbr.cs.umass.edu/camato/decpomdp/overview.html}{\faLink}}
+	%	\begin{itemize}
+	%		\item Extension of POMDP to Multi-Agent settings
+	%		\item N agent act in a Markovian environment \emph{but} they perceive only partial information about it (observations)
+	%		\item[\faExclamationTriangle] Does not consider homogeneity
+	%	\end{itemize}
+	%\end{exampleblock}
+	%\begin{exampleblock}{SwarMDP~\footnote[frame]{\fullcite{DBLP:journals/corr/SosicKZK16}}}
+	%	\begin{itemize}
+	%		\item Consider a homogeneous population of agents (i.e. same action, observation space and same policy)
+	%		\item Learning lead to a single policy that map observation (not history) to action
+	%		\item[\faExclamationTriangle] Time continuing to be synchronous
+	%	\end{itemize}
+	%\end{exampleblock}
+%\end{frame}
 
 \begin{frame}{Learning in CAS: A simplified model}
 	\begin{exampleblock}{}		
